@@ -8,6 +8,8 @@ public class SnapPicture : MonoBehaviour
     public TextMeshProUGUI snapText;
     public Camera cam;
     public Vector2 originalCamPos;
+    
+    public bool gameStarted = false;
 
     void Start()
     {
@@ -15,7 +17,7 @@ public class SnapPicture : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && gameStarted)
         {
             RaycastHit2D hit = Physics2D.Raycast(cam.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
             if (hit.collider != null)
