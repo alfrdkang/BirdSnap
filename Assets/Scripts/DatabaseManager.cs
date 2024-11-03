@@ -7,7 +7,7 @@ using Firebase.Database;
 using Firebase.Auth;
 using Google.MiniJSON;
 using TMPro;
-using UnityEditor.Build.Content;
+using UnityEditor;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
 using Firebase.Extensions;
@@ -21,7 +21,6 @@ public class DatabaseManager : MonoBehaviour
     private Firebase.Auth.FirebaseUser user;
 
     private int numberOfPlayers;
-    private bool loggedIn = false;
     
     [SerializeField] private GameObject homeScreen;
     [SerializeField] private GameObject signupScreen;
@@ -106,30 +105,27 @@ public class DatabaseManager : MonoBehaviour
 
                     // Firebase user has been created.
                     Firebase.Auth.AuthResult result = task.Result;
-                    loggedIn = true;
                     Debug.LogFormat("auth user created successfully: {0} ({1})",
                         result.User.DisplayName, result.User.UserId);
                     });
-                    if (loggedIn)
-                    {
-                        signupScreen.SetActive(false);
-                        homeScreen.SetActive(true);
-                        WriteNewPlayer(
-                            signupUsernameInputField.text,
-                            signupEmailInputField.text,
-                            signupPasswordInputField.text,
-                            "",
-                            "",
-                            0,
-                            0,
-                            0,
-                            new string[] { "New Snapper" },
-                            1
-                            );
-                        signupUsernameInputField.text = "";
-                        signupEmailInputField.text = "";
-                        signupPasswordInputField.text = "";
-                    }
+                    signupScreen.SetActive(false);
+                    homeScreen.SetActive(true);
+                    StartCoroutine(Delay(2));
+                    WriteNewPlayer(
+                        signupUsernameInputField.text,
+                        signupEmailInputField.text,
+                        signupPasswordInputField.text,
+                        "",
+                        "",
+                        0,
+                        0,
+                        0,
+                        new string[] { "New Snapper" },
+                        1
+                    );
+                    signupUsernameInputField.text = "";
+                    signupEmailInputField.text = "";
+                    signupPasswordInputField.text = "";
                 }
                 else
                 {
@@ -161,26 +157,24 @@ public class DatabaseManager : MonoBehaviour
                 Debug.LogError("SignInWithEmailAndPasswordAsync encountered an error: " + task.Exception);
                 return;
             }
-            loggedIn = true;
             Firebase.Auth.AuthResult result = task.Result;
             Debug.LogFormat("User signed in successfully: {0} ({1})",
                 result.User.DisplayName, result.User.UserId);
         });
-        if (loggedIn == true)
-        {
-            loginScreen.SetActive(false);
-            homeScreen.SetActive(true);
-            loginEmailInputField.text = "";
-            loginPasswordInputField.text = "";
-        }
+        loginScreen.SetActive(false);
+        homeScreen.SetActive(true);
+        loginEmailInputField.text = "";
+        loginPasswordInputField.text = "";
     }
 
     public void Logout()
     {
         Debug.Log("Log Out!");
-        loggedIn = false;   
         auth.SignOut();
     }
+    
+    
+    //Account Validation Functions
     
     private bool isValidEmail(string email) {
         try {
@@ -215,7 +209,8 @@ public class DatabaseManager : MonoBehaviour
         
         return true;
     }
-
+    
+    //Db Writing Functions
     private void WriteNewPlayer(string name, string email, string password, string creationDate, string lastLoginDate, int highScore, int gamesPlayed, int birdsSnapped, string[] achievements, int level)
     {
         PlayerData player = new PlayerData(name, email, password, creationDate, lastLoginDate, highScore, gamesPlayed, birdsSnapped, achievements, level);
@@ -235,5 +230,10 @@ public class DatabaseManager : MonoBehaviour
         Dictionary<string, object> childUpdates = new Dictionary<string, object>();
         childUpdates[user.UserId + "/score"] = score;
         reference.UpdateChildrenAsync(childUpdates);
+    }
+
+    private IEnumerator Delay(int seconds)
+    {
+        yield return new WaitForSeconds(seconds);
     }
 }
