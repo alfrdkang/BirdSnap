@@ -26,6 +26,7 @@ public class DatabaseManager : MonoBehaviour
     [SerializeField] private GameObject homeScreen;
     [SerializeField] private GameObject signupScreen;
     [SerializeField] private GameObject loginScreen;
+    [SerializeField] private GameObject resetPasswordScreen;
     
     //Signup
     [SerializeField] private TMP_InputField signupUsernameInputField;
@@ -38,7 +39,10 @@ public class DatabaseManager : MonoBehaviour
     [SerializeField] private TMP_InputField loginEmailInputField;
     [SerializeField] private TMP_InputField loginPasswordInputField;
     [SerializeField] private TextMeshProUGUI loginValidationText;
-
+    
+    //Reset Password
+    [SerializeField] private TMP_InputField resetPasswordEmailInputField;
+    [SerializeField] private TextMeshProUGUI resetPasswordValidationText;
 
     void Start()
     {
@@ -141,7 +145,7 @@ public class DatabaseManager : MonoBehaviour
                                     signupUsernameInputField.text,
                                     signupEmailInputField.text,
                                     "",
-                                    "",
+                                    ConvertNowToTimeStamp(),
                                     0,
                                     0,
                                     0,
@@ -226,6 +230,48 @@ public class DatabaseManager : MonoBehaviour
         }
     }
 
+    public void ResetPassword()
+    {
+        if (!string.IsNullOrWhiteSpace(resetPasswordEmailInputField.text))
+        {
+            if (isValidEmail(resetPasswordEmailInputField.text))
+            {
+                auth.SendPasswordResetEmailAsync(resetPasswordEmailInputField.text).ContinueWithOnMainThread(task =>
+                {
+                    if (task.IsCanceled)
+                    {
+                        Debug.LogError("SendPasswordResetEmailAsync was canceled.");
+                        return;
+                    }
+
+                    if (task.IsFaulted)
+                    {
+                        resetPasswordValidationText.text = HandleAuthExceptions(task.Exception);
+                        Debug.LogError("SendPasswordResetEmailAsync encountered an error: " + task.Exception);
+                        return;
+                    }
+
+                    if (task.IsCompleted)
+                    {
+                        loginScreen.SetActive(true);
+                        resetPasswordScreen.SetActive(false);
+                        ResetFields();
+                    }
+
+                    Debug.Log("Password reset email sent successfully.");
+                });
+            }
+            else
+            {
+                resetPasswordValidationText.text = "Invalid Email";
+            }
+        }
+        else
+        {
+            resetPasswordValidationText.text = "Please fill all fields";
+        }
+    }
+
     public void Logout()
     {
         Debug.Log("Log Out!");
@@ -242,6 +288,8 @@ public class DatabaseManager : MonoBehaviour
         loginEmailInputField.text = "";
         loginPasswordInputField.text = "";
         loginValidationText.text = "";
+        resetPasswordValidationText.text = "";
+        resetPasswordEmailInputField.text = "";
     }
     
     
@@ -336,5 +384,12 @@ public class DatabaseManager : MonoBehaviour
         Dictionary<string, object> childUpdates = new Dictionary<string, object>();
         childUpdates[user.UserId + "/score"] = score;
         reference.UpdateChildrenAsync(childUpdates);
+    }
+    
+    public string ConvertNowToTimeStamp()
+    {
+        DateTimeOffset dto = new DateTimeOffset(DateTime.UtcNow);
+        // Get the unix timestamp in seconds
+        return dto.ToUnixTimeSeconds().ToString();
     }
 }

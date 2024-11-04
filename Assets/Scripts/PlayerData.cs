@@ -31,6 +31,5 @@ public class PlayerData
         DateTimeOffset dto = new DateTimeOffset(DateTime.UtcNow);
         // Get the unix timestamp in seconds
         return dto.ToUnixTimeSeconds().ToString();
-        
     }
 }
