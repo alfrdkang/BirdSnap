@@ -5,7 +5,6 @@ public class PlayerData
 {
     public string name;
     public string email;
-    public string password;
     public string creationDate;
     public string lastLoginDate;
     public int highScore;
@@ -14,11 +13,10 @@ public class PlayerData
     public string[] achievements;
     public int level;
 
-    public PlayerData(string name, string email, string password, string creationDate, string lastLoginDate, int highScore, int gamesPlayed, int birdsSnapped, string[] achievements, int level)
+    public PlayerData(string name, string email, string creationDate, string lastLoginDate, int highScore, int gamesPlayed, int birdsSnapped, string[] achievements, int level)
     {
         this.name = name;
         this.email = email;
-        this.password = password;
         this.creationDate = ConvertNowToTimeStamp();
         this.lastLoginDate = lastLoginDate;
         this.highScore = highScore;

@@ -3,7 +3,7 @@
     "project_number": "822789407724",
     "firebase_url": "https://birdsnap-9221f-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "birdsnap-9221f",
-    "storage_bucket": "birdsnap-9221f.appspot.com"
+    "storage_bucket": "birdsnap-9221f.firebasestorage.app"
   },
   "client": [
     {
