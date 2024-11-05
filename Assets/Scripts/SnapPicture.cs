@@ -9,7 +9,8 @@ public class SnapPicture : MonoBehaviour
     public Camera cam;
     public Vector2 originalCamPos;
     
-    public bool gameStarted = false;
+    private bool gameStarted = true;
+    private bool canSnap = true;
 
     void Start()
     {
@@ -17,34 +18,43 @@ public class SnapPicture : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && gameStarted)
+        if (Input.GetMouseButtonDown(0) && gameStarted && canSnap)
         {
+            canSnap = false;
+            
             RaycastHit2D hit = Physics2D.Raycast(cam.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-            if (hit.collider != null)
+            if (hit.collider.CompareTag("Animal"))
             {
+                GameManager.instance.BirdSnapped(hit.collider.gameObject.GetComponent<Bird>());
+
                 Vector3 clickPoint = new Vector3(hit.collider.transform.position.x, hit.collider.transform.position.y-0.2f, -10);
-                cam.transform.position = clickPoint;
+                cam.transform.position= clickPoint;
                 cam.orthographicSize = 1;
-                Debug.Log(hit.collider.name);
-                snapText.text = hit.collider.gameObject.name+" Caught!";
-                StartCoroutine(ZoomOut());
+                hit.collider.gameObject.GetComponent<Bird>().speed = 0;
+                snapText.text = hit.collider.GetComponent<Bird>().birdName + " Caught!";
+                StartCoroutine(ZoomOut(hit.collider.gameObject));
             }
             else
             {
                 cam.transform.position = cam.ScreenToWorldPoint(Input.mousePosition);
                 cam.orthographicSize = 1;
-                Debug.Log("Miss!");
                 snapText.text = "Miss!";
-                StartCoroutine(ZoomOut());
+                StartCoroutine(ZoomOut(null));
             }
         }
     }
     
-    IEnumerator ZoomOut()
+    IEnumerator ZoomOut(GameObject bird)
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1);
         cam.transform.position = new Vector3(0, 0, -10);
         cam.orthographicSize = 5;
         snapText.text = "";
+        if (bird != null)
+        {
+            bird.GetComponent<Bird>().speed = 5;
+        }
+        
+        canSnap = true;
     }
 }
