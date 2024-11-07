@@ -4,10 +4,25 @@ using UnityEngine;
 
 public class AnimalSpawn : MonoBehaviour
 {
+    public static AnimalSpawn instance;
+    
     [SerializeField] private GameObject[] birds;
     
     private float spawnInterval;
     private float timer;
+    
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {
@@ -16,7 +31,7 @@ public class AnimalSpawn : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.instance.gameStarted)
+        while (GameManager.instance.gameStarted)
         {
             timer += Time.deltaTime;
             if (timer >= spawnInterval)

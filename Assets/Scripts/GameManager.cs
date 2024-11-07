@@ -7,8 +7,16 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public int score;
+    public float accuracy;
+    public int birdsSnapped;
+    public int snapCount;
     
-    public bool gameStarted = true;
+    public bool gameStarted = false;
+    
+    [SerializeField] private GameObject gameOverScreen;
+    [SerializeField] private GameObject gameOverScore;
+    [SerializeField] private GameObject gameOverBirdsSnap;
+    [SerializeField] private GameObject gameOverAccuracy;
     
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI timerText;
@@ -28,12 +36,34 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(Timer.instance.StartTimer(360f));
+        
+    }
+
+    public void StartGame(int duration)
+    {
+        gameStarted = true;
+        StartCoroutine(Timer.instance.StartTimer(duration));
+    }
+
+    public void EndGame()
+    {
+        gameStarted = false;
+        gameOverScreen.SetActive(true);
+        gameOverScore.GetComponent<TextMeshProUGUI>().text = "Score: " + score;
+        gameOverBirdsSnap.GetComponent<TextMeshProUGUI>().text = "Birds Snapped: " + birdsSnapped;
+        gameOverAccuracy.GetComponent<TextMeshProUGUI>().text = "Accuracy: " + (Mathf.Round(CalculateAccuracy(birdsSnapped, snapCount) * 100)) / 100.0 + "%";
     }
 
     public void BirdSnapped(Bird bird)
     {
         score += bird.birdScore;
+        birdsSnapped++;
+        snapCount++;
         scoreText.text = "Score: " + score.ToString();
+    }
+
+    public float CalculateAccuracy(float birdsSnapped, float snapCount)
+    {
+        return(snapCount / birdsSnapped * 100);
     }
 }

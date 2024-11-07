@@ -34,5 +34,6 @@ public class Timer : MonoBehaviour
             timerText.text = string.Format("{00:00}:{01:00}", minutes,seconds);
             yield return new WaitForSeconds(1);
         }
+        GameManager.instance.EndGame();
     }
 }

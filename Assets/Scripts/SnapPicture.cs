@@ -9,7 +9,7 @@ public class SnapPicture : MonoBehaviour
     public Camera cam;
     public Vector2 originalCamPos;
     
-    private bool canSnap = true;
+    public bool canSnap = true;
 
     void Start()
     {
@@ -23,20 +23,24 @@ public class SnapPicture : MonoBehaviour
             
             RaycastHit2D hit = Physics2D.Raycast(cam.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
             
-            if (hit.collider.CompareTag("Animal") && hit.collider.gameObject.GetComponent<Bird>().snapped == false)
+            if (hit.collider.CompareTag("Animal"))
             {
-                GameManager.instance.BirdSnapped(hit.collider.gameObject.GetComponent<Bird>());
+                if (hit.collider.gameObject.GetComponent<Bird>().snapped == false)
+                {
+                    GameManager.instance.BirdSnapped(hit.collider.gameObject.GetComponent<Bird>());
 
-                Vector3 clickPoint = new Vector3(hit.collider.transform.position.x, hit.collider.transform.position.y-0.2f, -10);
-                cam.transform.position= clickPoint;
-                cam.orthographicSize = 1;
-                hit.collider.gameObject.GetComponent<Bird>().speed = 0;
-                hit.collider.gameObject.GetComponent<Bird>().snapped = true;
-                snapText.text = hit.collider.GetComponent<Bird>().birdName + " Caught!";
-                StartCoroutine(ZoomOut(hit.collider.gameObject));
+                    Vector3 clickPoint = new Vector3(hit.collider.transform.position.x, hit.collider.transform.position.y-0.2f, -10);
+                    cam.transform.position= clickPoint;
+                    cam.orthographicSize = 1;
+                    hit.collider.gameObject.GetComponent<Bird>().speed = 0;
+                    hit.collider.gameObject.GetComponent<Bird>().snapped = true;
+                    snapText.text = hit.collider.GetComponent<Bird>().birdName + " Caught!";
+                    StartCoroutine(ZoomOut(hit.collider.gameObject));
+                }
             }
             else
             {
+                GameManager.instance.birdsSnapped++;
                 cam.transform.position = cam.ScreenToWorldPoint(Input.mousePosition);
                 cam.orthographicSize = 1;
                 snapText.text = "Miss!";
