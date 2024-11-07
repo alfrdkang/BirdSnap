@@ -16,12 +16,15 @@ public class AnimalSpawn : MonoBehaviour
 
     private void Update()
     {
-        timer += Time.deltaTime;
-        if (timer >= spawnInterval)
+        if (GameManager.instance.gameStarted)
         {
-            SpawnObject();
-            timer = 0;
-            spawnInterval = Random.Range(1f, 5f);
+            timer += Time.deltaTime;
+            if (timer >= spawnInterval)
+            {
+                SpawnObject();
+                timer = 0;
+                spawnInterval = Random.Range(1f, 5f);
+            }
         }
     }
 

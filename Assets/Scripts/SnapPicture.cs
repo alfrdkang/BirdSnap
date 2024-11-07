@@ -9,7 +9,6 @@ public class SnapPicture : MonoBehaviour
     public Camera cam;
     public Vector2 originalCamPos;
     
-    private bool gameStarted = true;
     private bool canSnap = true;
 
     void Start()
@@ -18,12 +17,13 @@ public class SnapPicture : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && gameStarted && canSnap)
+        if (Input.GetMouseButtonDown(0) && GameManager.instance.gameStarted && canSnap)
         {
             canSnap = false;
             
             RaycastHit2D hit = Physics2D.Raycast(cam.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-            if (hit.collider.CompareTag("Animal"))
+            
+            if (hit.collider.CompareTag("Animal") && hit.collider.gameObject.GetComponent<Bird>().snapped == false)
             {
                 GameManager.instance.BirdSnapped(hit.collider.gameObject.GetComponent<Bird>());
 
@@ -31,6 +31,7 @@ public class SnapPicture : MonoBehaviour
                 cam.transform.position= clickPoint;
                 cam.orthographicSize = 1;
                 hit.collider.gameObject.GetComponent<Bird>().speed = 0;
+                hit.collider.gameObject.GetComponent<Bird>().snapped = true;
                 snapText.text = hit.collider.GetComponent<Bird>().birdName + " Caught!";
                 StartCoroutine(ZoomOut(hit.collider.gameObject));
             }
@@ -52,7 +53,7 @@ public class SnapPicture : MonoBehaviour
         snapText.text = "";
         if (bird != null)
         {
-            bird.GetComponent<Bird>().speed = 5;
+            bird.GetComponent<Bird>().speed = bird.GetComponent<Bird>().originalSpeed;
         }
         
         canSnap = true;

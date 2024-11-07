@@ -11,9 +11,9 @@ public class PlayerData
     public int gamesPlayed;
     public int birdsSnapped;
     public string[] achievements;
-    public int level;
+    public float accuracy;
 
-    public PlayerData(string name, string email, string creationDate, string lastLoginDate, int highScore, int gamesPlayed, int birdsSnapped, string[] achievements, int level)
+    public PlayerData(string name, string email, string creationDate, string lastLoginDate, int highScore, int gamesPlayed, int birdsSnapped, string[] achievements, float accuracy)
     {
         this.name = name;
         this.email = email;
@@ -23,7 +23,7 @@ public class PlayerData
         this.gamesPlayed = gamesPlayed;
         this.birdsSnapped = birdsSnapped;
         this.achievements = achievements;
-        this.level = level;
+        this.accuracy = accuracy;
     }
     
     public string ConvertNowToTimeStamp()

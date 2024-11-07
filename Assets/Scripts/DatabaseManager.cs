@@ -366,9 +366,9 @@ public class DatabaseManager : MonoBehaviour
     }
     
     //Db Writing Functions
-    private void WriteNewPlayer(string uid, string name, string email, string creationDate, string lastLoginDate, int highScore, int gamesPlayed, int birdsSnapped, string[] achievements, int level)
+    private void WriteNewPlayer(string uid, string name, string email, string creationDate, string lastLoginDate, int highScore, int gamesPlayed, int birdsSnapped, string[] achievements, float accuracy)
     {
-        PlayerData player = new PlayerData(name, email, creationDate, lastLoginDate, highScore, gamesPlayed, birdsSnapped, achievements, level);
+        PlayerData player = new PlayerData(name, email, creationDate, lastLoginDate, highScore, gamesPlayed, birdsSnapped, achievements, accuracy);
         
         string json = JsonUtility.ToJson(player);
         Debug.Log(json);

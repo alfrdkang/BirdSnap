@@ -155,5 +155,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9144835a2ec8453b867c590bf7d4a40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 7
+  originalSpeed: 0
+  snapped: 0
   birdName: Hummingbird
+  birdScore: 3

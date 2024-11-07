@@ -6,7 +6,9 @@ using UnityEngine;
 public class Bird : MonoBehaviour
 {
     public float speed;
-    private float originalSpeed;
+    public float originalSpeed;
+
+    public bool snapped = false;
     
     public string birdName;
     public int birdScore;

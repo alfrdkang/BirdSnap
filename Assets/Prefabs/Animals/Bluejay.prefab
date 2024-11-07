@@ -156,4 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  originalSpeed: 0
+  snapped: 0
   birdName: Bluejay
+  birdScore: 1
