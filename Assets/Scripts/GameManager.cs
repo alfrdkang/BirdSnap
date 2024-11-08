@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     
     public bool gameStarted = false;
     
+    [SerializeField] private GameObject hud;
     [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private GameObject gameOverScore;
     [SerializeField] private GameObject gameOverBirdsSnap;
@@ -48,6 +49,7 @@ public class GameManager : MonoBehaviour
     public void EndGame()
     {
         gameStarted = false;
+        hud.SetActive(false);
         gameOverScreen.SetActive(true);
         gameOverScore.GetComponent<TextMeshProUGUI>().text = "Score: " + score;
         gameOverBirdsSnap.GetComponent<TextMeshProUGUI>().text = "Birds Snapped: " + birdsSnapped;

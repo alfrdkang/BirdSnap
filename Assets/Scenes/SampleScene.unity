@@ -1569,10 +1569,8 @@ GameObject:
   - component: {fileID: 155371465}
   - component: {fileID: 155371471}
   - component: {fileID: 155371470}
-  - component: {fileID: 155371469}
   - component: {fileID: 155371468}
   - component: {fileID: 155371467}
-  - component: {fileID: 155371466}
   m_Layer: 5
   m_Name: Button_Back
   m_TagString: Untagged
@@ -1600,47 +1598,6 @@ RectTransform:
   m_AnchoredPosition: {x: -1115.5, y: 399}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &155371466
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 155371464}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 155371469}
-          m_TargetAssemblyTypeName: MainMenuBtn, Assembly-CSharp
-          m_MethodName: HoverEnter
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 155371469}
-          m_TargetAssemblyTypeName: MainMenuBtn, Assembly-CSharp
-          m_MethodName: HoverExit
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &155371467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1700,18 +1657,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &155371469
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 155371464}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &155371470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2445,10 +2390,8 @@ GameObject:
   - component: {fileID: 192936051}
   - component: {fileID: 192936057}
   - component: {fileID: 192936056}
-  - component: {fileID: 192936055}
   - component: {fileID: 192936054}
   - component: {fileID: 192936053}
-  - component: {fileID: 192936052}
   m_Layer: 5
   m_Name: HighScoreToggle
   m_TagString: Untagged
@@ -2476,47 +2419,6 @@ RectTransform:
   m_AnchoredPosition: {x: 213.83334, y: -50}
   m_SizeDelta: {x: 427.6667, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &192936052
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 192936050}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 192936055}
-          m_TargetAssemblyTypeName: MainMenuBtn, Assembly-CSharp
-          m_MethodName: HoverEnter
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 192936055}
-          m_TargetAssemblyTypeName: MainMenuBtn, Assembly-CSharp
-          m_MethodName: HoverExit
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &192936053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2576,18 +2478,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &192936055
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 192936050}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &192936056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3073,10 +2963,8 @@ GameObject:
   - component: {fileID: 336120102}
   - component: {fileID: 336120108}
   - component: {fileID: 336120107}
-  - component: {fileID: 336120106}
   - component: {fileID: 336120105}
   - component: {fileID: 336120104}
-  - component: {fileID: 336120103}
   m_Layer: 5
   m_Name: DelAccount
   m_TagString: Untagged
@@ -3104,47 +2992,6 @@ RectTransform:
   m_AnchoredPosition: {x: 450, y: -612.5}
   m_SizeDelta: {x: 900, y: 175}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &336120103
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 336120101}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 336120106}
-          m_TargetAssemblyTypeName: MainMenuBtn, Assembly-CSharp
-          m_MethodName: HoverEnter
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 336120106}
-          m_TargetAssemblyTypeName: MainMenuBtn, Assembly-CSharp
-          m_MethodName: HoverExit
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &336120104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3204,18 +3051,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &336120106
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 336120101}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &336120107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5169,7 +5004,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -9.190063, y: 122}
-  m_SizeDelta: {x: 231.32562, y: 50}
+  m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &448684682
 MonoBehaviour:
@@ -7520,7 +7355,6 @@ GameObject:
   - component: {fileID: 703265417}
   - component: {fileID: 703265416}
   - component: {fileID: 703265415}
-  - component: {fileID: 703265414}
   m_Layer: 5
   m_Name: GameOverMenu
   m_TagString: Untagged
@@ -7528,18 +7362,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!114 &703265414
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 703265413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &703265415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7793,10 +7615,8 @@ GameObject:
   - component: {fileID: 716178201}
   - component: {fileID: 716178207}
   - component: {fileID: 716178206}
-  - component: {fileID: 716178205}
   - component: {fileID: 716178204}
   - component: {fileID: 716178203}
-  - component: {fileID: 716178202}
   m_Layer: 5
   m_Name: ChangeEmail
   m_TagString: Untagged
@@ -7824,47 +7644,6 @@ RectTransform:
   m_AnchoredPosition: {x: 450, y: -262.5}
   m_SizeDelta: {x: 900, y: 175}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &716178202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 716178200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 716178205}
-          m_TargetAssemblyTypeName: MainMenuBtn, Assembly-CSharp
-          m_MethodName: HoverEnter
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 716178205}
-          m_TargetAssemblyTypeName: MainMenuBtn, Assembly-CSharp
-          m_MethodName: HoverExit
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &716178203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7924,18 +7703,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &716178205
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 716178200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &716178206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8853,10 +8620,8 @@ GameObject:
   - component: {fileID: 904078030}
   - component: {fileID: 904078036}
   - component: {fileID: 904078035}
-  - component: {fileID: 904078034}
   - component: {fileID: 904078033}
   - component: {fileID: 904078032}
-  - component: {fileID: 904078031}
   m_Layer: 5
   m_Name: ChangePassword
   m_TagString: Untagged
@@ -8884,47 +8649,6 @@ RectTransform:
   m_AnchoredPosition: {x: 450, y: -437.5}
   m_SizeDelta: {x: 900, y: 175}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &904078031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 904078029}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 904078034}
-          m_TargetAssemblyTypeName: MainMenuBtn, Assembly-CSharp
-          m_MethodName: HoverEnter
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 904078034}
-          m_TargetAssemblyTypeName: MainMenuBtn, Assembly-CSharp
-          m_MethodName: HoverExit
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &904078032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8984,18 +8708,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &904078034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 904078029}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &904078035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10732,10 +10444,8 @@ GameObject:
   - component: {fileID: 1110356155}
   - component: {fileID: 1110356161}
   - component: {fileID: 1110356160}
-  - component: {fileID: 1110356159}
   - component: {fileID: 1110356158}
   - component: {fileID: 1110356157}
-  - component: {fileID: 1110356156}
   m_Layer: 5
   m_Name: Button_Back
   m_TagString: Untagged
@@ -10763,47 +10473,6 @@ RectTransform:
   m_AnchoredPosition: {x: -834, y: 399}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1110356156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1110356154}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1371620004}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 312185281}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
 --- !u!114 &1110356157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10862,19 +10531,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1110356160}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!114 &1110356159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1110356154}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
+      m_Calls:
+      - m_Target: {fileID: 1371620004}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 312185281}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &1110356160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10929,10 +10610,8 @@ GameObject:
   - component: {fileID: 1118497262}
   - component: {fileID: 1118497268}
   - component: {fileID: 1118497267}
-  - component: {fileID: 1118497266}
   - component: {fileID: 1118497265}
   - component: {fileID: 1118497264}
-  - component: {fileID: 1118497263}
   m_Layer: 5
   m_Name: AccuracyToggle
   m_TagString: Untagged
@@ -10960,47 +10639,6 @@ RectTransform:
   m_AnchoredPosition: {x: 1069.1667, y: -50}
   m_SizeDelta: {x: 427.6667, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1118497263
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1118497261}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1118497266}
-          m_TargetAssemblyTypeName: MainMenuBtn, Assembly-CSharp
-          m_MethodName: HoverEnter
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1118497266}
-          m_TargetAssemblyTypeName: MainMenuBtn, Assembly-CSharp
-          m_MethodName: HoverExit
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &1118497264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11060,18 +10698,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1118497266
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1118497261}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1118497267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11276,10 +10902,8 @@ GameObject:
   - component: {fileID: 1137355281}
   - component: {fileID: 1137355287}
   - component: {fileID: 1137355286}
-  - component: {fileID: 1137355285}
   - component: {fileID: 1137355284}
   - component: {fileID: 1137355283}
-  - component: {fileID: 1137355282}
   m_Layer: 5
   m_Name: BirdsSnappedToggle
   m_TagString: Untagged
@@ -11307,47 +10931,6 @@ RectTransform:
   m_AnchoredPosition: {x: 641.5, y: -50}
   m_SizeDelta: {x: 427.6667, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1137355282
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1137355280}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1137355285}
-          m_TargetAssemblyTypeName: MainMenuBtn, Assembly-CSharp
-          m_MethodName: HoverEnter
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1137355285}
-          m_TargetAssemblyTypeName: MainMenuBtn, Assembly-CSharp
-          m_MethodName: HoverExit
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &1137355283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11407,18 +10990,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1137355285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1137355280}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1137355286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15594,10 +15165,8 @@ GameObject:
   - component: {fileID: 1494728862}
   - component: {fileID: 1494728868}
   - component: {fileID: 1494728867}
-  - component: {fileID: 1494728866}
   - component: {fileID: 1494728865}
   - component: {fileID: 1494728864}
-  - component: {fileID: 1494728863}
   m_Layer: 5
   m_Name: Button_Quit
   m_TagString: Untagged
@@ -15626,47 +15195,6 @@ RectTransform:
   m_AnchoredPosition: {x: 757.5, y: -106.5}
   m_SizeDelta: {x: 485, y: 210.4079}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1494728863
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1494728861}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1494728866}
-          m_TargetAssemblyTypeName: MainMenuBtn, Assembly-CSharp
-          m_MethodName: HoverEnter
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1494728866}
-          m_TargetAssemblyTypeName: MainMenuBtn, Assembly-CSharp
-          m_MethodName: HoverExit
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &1494728864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15726,8 +15254,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1494728866}
-        m_TargetAssemblyTypeName: MainMenuBtn, Assembly-CSharp
+      - m_Target: {fileID: 1224941129}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: Quit
         m_Mode: 1
         m_Arguments:
@@ -15738,18 +15266,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1494728866
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1494728861}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1494728867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17781,7 +17297,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -9.190063, y: 42}
-  m_SizeDelta: {x: 231.32562, y: 50}
+  m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1665053985
 MonoBehaviour:
@@ -18014,7 +17530,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -9.190063, y: -38}
-  m_SizeDelta: {x: 231.32562, y: 50}
+  m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1705346608 stripped
 RectTransform:
@@ -18107,10 +17623,8 @@ GameObject:
   - component: {fileID: 1722989242}
   - component: {fileID: 1722989248}
   - component: {fileID: 1722989247}
-  - component: {fileID: 1722989246}
   - component: {fileID: 1722989245}
   - component: {fileID: 1722989244}
-  - component: {fileID: 1722989243}
   m_Layer: 5
   m_Name: ChangeUsername
   m_TagString: Untagged
@@ -18138,47 +17652,6 @@ RectTransform:
   m_AnchoredPosition: {x: 450, y: -87.5}
   m_SizeDelta: {x: 900, y: 175}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1722989243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1722989241}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1722989246}
-          m_TargetAssemblyTypeName: MainMenuBtn, Assembly-CSharp
-          m_MethodName: HoverEnter
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1722989246}
-          m_TargetAssemblyTypeName: MainMenuBtn, Assembly-CSharp
-          m_MethodName: HoverExit
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &1722989244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18238,18 +17711,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1722989246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1722989241}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1722989247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19577,10 +19038,8 @@ GameObject:
   - component: {fileID: 1870580953}
   - component: {fileID: 1870580959}
   - component: {fileID: 1870580958}
-  - component: {fileID: 1870580957}
   - component: {fileID: 1870580956}
   - component: {fileID: 1870580955}
-  - component: {fileID: 1870580954}
   m_Layer: 5
   m_Name: Button_Restart
   m_TagString: Untagged
@@ -19609,47 +19068,6 @@ RectTransform:
   m_AnchoredPosition: {x: 242.5, y: -106.5}
   m_SizeDelta: {x: 485, y: 210.4079}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1870580954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1870580952}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1494728866}
-          m_TargetAssemblyTypeName: MainMenuBtn, Assembly-CSharp
-          m_MethodName: HoverEnter
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1494728866}
-          m_TargetAssemblyTypeName: MainMenuBtn, Assembly-CSharp
-          m_MethodName: HoverExit
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &1870580955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19709,8 +19127,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 703265414}
-        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+      - m_Target: {fileID: 1224941129}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: Restart
         m_Mode: 1
         m_Arguments:
@@ -19721,18 +19139,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1870580957
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1870580952}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1870580958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20301,10 +19707,8 @@ GameObject:
   - component: {fileID: 1956005054}
   - component: {fileID: 1956005060}
   - component: {fileID: 1956005059}
-  - component: {fileID: 1956005058}
   - component: {fileID: 1956005057}
   - component: {fileID: 1956005056}
-  - component: {fileID: 1956005055}
   m_Layer: 5
   m_Name: Button_Back
   m_TagString: Untagged
@@ -20332,47 +19736,6 @@ RectTransform:
   m_AnchoredPosition: {x: -834, y: 399}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1956005055
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1956005053}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1956005058}
-          m_TargetAssemblyTypeName: MainMenuBtn, Assembly-CSharp
-          m_MethodName: HoverEnter
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1956005058}
-          m_TargetAssemblyTypeName: MainMenuBtn, Assembly-CSharp
-          m_MethodName: HoverExit
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &1956005056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20456,18 +19819,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
---- !u!114 &1956005058
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1956005053}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1956005059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21186,6 +20537,7 @@ MonoBehaviour:
   snapText: {fileID: 1840720217}
   cam: {fileID: 519420031}
   originalCamPos: {x: 0, y: 0}
+  canSnap: 1
 --- !u!4 &2075225459
 Transform:
   m_ObjectHideFlags: 0
@@ -21242,6 +20594,7 @@ MonoBehaviour:
   birdsSnapped: 0
   snapCount: 0
   gameStarted: 0
+  hud: {fileID: 1529304444}
   gameOverScreen: {fileID: 703265413}
   gameOverScore: {fileID: 448684680}
   gameOverBirdsSnap: {fileID: 1665053983}
@@ -21888,47 +21241,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Padding: {x: -8, y: -5, z: -8, w: -5}
   m_Softness: {x: 0, y: 0}
---- !u!114 &322634527368155285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8807383571776671485}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6706095877050111459}
-          m_TargetAssemblyTypeName: MainMenuBtn, Assembly-CSharp
-          m_MethodName: HoverEnter
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 6706095877050111459}
-          m_TargetAssemblyTypeName: MainMenuBtn, Assembly-CSharp
-          m_MethodName: HoverExit
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &461514122328435556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22000,6 +21312,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 378182665586200099, guid: c888b3bb4fd5c4763b4a17aa8ca01e22, type: 3}
+      propertyPath: m_TagString
+      value: Background
+      objectReference: {fileID: 0}
+    - target: {fileID: 580089829866224733, guid: c888b3bb4fd5c4763b4a17aa8ca01e22, type: 3}
+      propertyPath: m_TagString
+      value: Background
+      objectReference: {fileID: 0}
+    - target: {fileID: 600239479890034641, guid: c888b3bb4fd5c4763b4a17aa8ca01e22, type: 3}
+      propertyPath: m_TagString
+      value: Background
+      objectReference: {fileID: 0}
+    - target: {fileID: 1867425705116681246, guid: c888b3bb4fd5c4763b4a17aa8ca01e22, type: 3}
+      propertyPath: m_TagString
+      value: Background
+      objectReference: {fileID: 0}
     - target: {fileID: 2119865641789099321, guid: c888b3bb4fd5c4763b4a17aa8ca01e22, type: 3}
       propertyPath: m_Name
       value: DarkWoods
@@ -22007,6 +21335,10 @@ PrefabInstance:
     - target: {fileID: 2119865641789099321, guid: c888b3bb4fd5c4763b4a17aa8ca01e22, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3417702455474480485, guid: c888b3bb4fd5c4763b4a17aa8ca01e22, type: 3}
+      propertyPath: m_TagString
+      value: Background
       objectReference: {fileID: 0}
     - target: {fileID: 3866975423335525405, guid: c888b3bb4fd5c4763b4a17aa8ca01e22, type: 3}
       propertyPath: m_LocalScale.x
@@ -22059,6 +21391,14 @@ PrefabInstance:
     - target: {fileID: 3866975423335525405, guid: c888b3bb4fd5c4763b4a17aa8ca01e22, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4417356389797682976, guid: c888b3bb4fd5c4763b4a17aa8ca01e22, type: 3}
+      propertyPath: m_TagString
+      value: Background
+      objectReference: {fileID: 0}
+    - target: {fileID: 8070784683897384371, guid: c888b3bb4fd5c4763b4a17aa8ca01e22, type: 3}
+      propertyPath: m_TagString
+      value: Background
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -22253,10 +21593,8 @@ GameObject:
   - component: {fileID: 2925411789866392368}
   - component: {fileID: 557008595977810762}
   - component: {fileID: 3644051719111085371}
-  - component: {fileID: 9137064779835235528}
   - component: {fileID: 3119403599023954034}
   - component: {fileID: 6430201772399504513}
-  - component: {fileID: 5711405081572963092}
   m_Layer: 5
   m_Name: Button_Continue
   m_TagString: Untagged
@@ -22275,10 +21613,8 @@ GameObject:
   - component: {fileID: 973608700199170420}
   - component: {fileID: 543201027677358006}
   - component: {fileID: 5590969219712529356}
-  - component: {fileID: 6706095877050111459}
   - component: {fileID: 7326993018200363097}
   - component: {fileID: 3700458600302710448}
-  - component: {fileID: 5623677641061821053}
   m_Layer: 5
   m_Name: Button_Quit
   m_TagString: Untagged
@@ -22777,8 +22113,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7924344470763023812}
-        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+      - m_Target: {fileID: 1224941129}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: Restart
         m_Mode: 1
         m_Arguments:
@@ -22914,8 +22250,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7924344470763023812}
-        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+      - m_Target: {fileID: 1224941129}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: Resume
         m_Mode: 1
         m_Arguments:
@@ -23077,7 +22413,6 @@ GameObject:
   - component: {fileID: 1762552329789124220}
   - component: {fileID: 7466447103377699498}
   - component: {fileID: 461514122328435556}
-  - component: {fileID: 7924344470763023812}
   m_Layer: 5
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -23340,10 +22675,8 @@ GameObject:
   - component: {fileID: 8819876009798529875}
   - component: {fileID: 6104846262845243902}
   - component: {fileID: 4566294680378517691}
-  - component: {fileID: 8076138622023208437}
   - component: {fileID: 2770001867372513917}
   - component: {fileID: 5106123326579603381}
-  - component: {fileID: 7436205119819181560}
   m_Layer: 5
   m_Name: Button_Restart
   m_TagString: Untagged
@@ -23644,47 +22977,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5623677641061821053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1607642766623810782}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6706095877050111459}
-          m_TargetAssemblyTypeName: MainMenuBtn, Assembly-CSharp
-          m_MethodName: HoverEnter
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 6706095877050111459}
-          m_TargetAssemblyTypeName: MainMenuBtn, Assembly-CSharp
-          m_MethodName: HoverExit
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!224 &5682503879653057479
 RectTransform:
   m_ObjectHideFlags: 0
@@ -23723,47 +23015,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 65}
   m_SizeDelta: {x: 920, y: 328}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5711405081572963092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1570130548038712306}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6706095877050111459}
-          m_TargetAssemblyTypeName: MainMenuBtn, Assembly-CSharp
-          m_MethodName: HoverEnter
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 6706095877050111459}
-          m_TargetAssemblyTypeName: MainMenuBtn, Assembly-CSharp
-          m_MethodName: HoverExit
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &5951119049256511077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23985,18 +23236,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6706095877050111459
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1607642766623810782}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6778546860696135236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24104,8 +23343,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6706095877050111459}
-        m_TargetAssemblyTypeName: MainMenuBtn, Assembly-CSharp
+      - m_Target: {fileID: 1224941129}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: Quit
         m_Mode: 1
         m_Arguments:
@@ -24134,47 +23373,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &7436205119819181560
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4615215676499088793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6706095877050111459}
-          m_TargetAssemblyTypeName: MainMenuBtn, Assembly-CSharp
-          m_MethodName: HoverEnter
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 6706095877050111459}
-          m_TargetAssemblyTypeName: MainMenuBtn, Assembly-CSharp
-          m_MethodName: HoverExit
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &7466447103377699498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24270,18 +23468,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6375631466357162514}
   m_CullTransparentMesh: 0
---- !u!114 &7924344470763023812
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3382863835754944344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7954680703732744353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24379,18 +23565,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4967115559316493191}
   m_CullTransparentMesh: 0
---- !u!114 &8076138622023208437
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4615215676499088793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8132262329709283390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24534,10 +23708,8 @@ GameObject:
   - component: {fileID: 4708177992971927003}
   - component: {fileID: 2257481316003415043}
   - component: {fileID: 2298869538862248913}
-  - component: {fileID: 8830845848620870508}
   - component: {fileID: 7570461978703109256}
   - component: {fileID: 6591334663449447880}
-  - component: {fileID: 322634527368155285}
   m_Layer: 5
   m_Name: Button_Options
   m_TagString: Untagged
@@ -24566,18 +23738,6 @@ RectTransform:
   m_AnchoredPosition: {x: 420, y: -106.5}
   m_SizeDelta: {x: 260, y: 210.4079}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8830845848620870508
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8807383571776671485}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8945867680300630330
 GameObject:
   m_ObjectHideFlags: 0
@@ -24603,18 +23763,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3483680062000717943}
   m_CullTransparentMesh: 0
---- !u!114 &9137064779835235528
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1570130548038712306}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &9147764298203147418
 MonoBehaviour:
   m_ObjectHideFlags: 0
