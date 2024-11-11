@@ -18,8 +18,8 @@ using UnityEngine.Rendering;
 public class DatabaseManager : MonoBehaviour
 {
     private DatabaseReference reference;
-    private Firebase.Auth.FirebaseAuth auth;
-    private Firebase.Auth.FirebaseUser user;
+    private FirebaseAuth auth;
+    private FirebaseUser user;
 
     private int numberOfPlayers;
     
@@ -46,12 +46,11 @@ public class DatabaseManager : MonoBehaviour
 
     void Start()
     {
-        
         reference = FirebaseDatabase.DefaultInstance.RootReference;
         auth = FirebaseAuth.DefaultInstance;
         auth.StateChanged += AuthStateChanged;
         
-        //NOTE: remove on release
+        //NOTE: remove on build
         if (auth.CurrentUser != null)
         {
             auth.SignOut();
@@ -93,6 +92,8 @@ public class DatabaseManager : MonoBehaviour
         numberOfPlayers = (int)args.Snapshot.ChildrenCount;
         //playerCountText.text = numberOfPlayers.ToString();
     }
+    
+    //Account Interaction Functions
 
     public void SignUp()  
     {
@@ -102,79 +103,67 @@ public class DatabaseManager : MonoBehaviour
             !string.IsNullOrWhiteSpace(signupPasswordInputField.text) && 
             !string.IsNullOrWhiteSpace(signupConfirmPasswordInputField.text))
         {
-            if (isValidEmail(signupEmailInputField.text))
+            if (signupPasswordInputField.text == signupConfirmPasswordInputField.text)
             {
-                if (signupPasswordInputField.text == signupConfirmPasswordInputField.text)
+                string username = signupUsernameInputField.text;
+                string email = signupEmailInputField.text;
+                string password = signupPasswordInputField.text;
+                
+                auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread(task => {
+                if (task.IsCanceled) {
+                    Debug.LogError("CreateUserWithEmailAndPasswordAsync was canceled.");
+                    return;
+                }
+                if (task.IsFaulted) {
+                    signupValidationText.text = HandleAuthExceptions(task.Exception);
+
+                    Debug.LogError("CreateUserWithEmailAndPasswordAsync encountered an error: " + task.Exception);
+                    return;
+                }
+
+                if (task.IsCompleted)
                 {
-                    if (ValidatePassword(signupPasswordInputField.text))
-                    {
-                        auth.CreateUserWithEmailAndPasswordAsync(signupEmailInputField.text, signupPasswordInputField.text).ContinueWithOnMainThread(task => {
+                    signupScreen.SetActive(false);
+                    homeScreen.SetActive(true);
+                    auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread(task => {
                         if (task.IsCanceled) {
-                            Debug.LogError("CreateUserWithEmailAndPasswordAsync was canceled.");
+                            Debug.LogError("SignInWithEmailAndPasswordAsync was canceled.");
                             return;
                         }
-                        if (task.IsFaulted) {
-                            signupValidationText.text = HandleAuthExceptions(task.Exception);
-
-                            Debug.LogError("CreateUserWithEmailAndPasswordAsync encountered an error: " + task.Exception);
-                            return;
-                        }
-
-                        if (task.IsCompleted)
+                        if (task.IsFaulted)
                         {
-                            signupScreen.SetActive(false);
-                            homeScreen.SetActive(true);
-                            auth.SignInWithEmailAndPasswordAsync(signupEmailInputField.text, signupPasswordInputField.text).ContinueWithOnMainThread(task => {
-                                if (task.IsCanceled) {
-                                    Debug.LogError("SignInWithEmailAndPasswordAsync was canceled.");
-                                    return;
-                                }
-                                if (task.IsFaulted)
-                                {
-                                    Debug.LogError("SignInWithEmailAndPasswordAsync encountered an error: " + task.Exception);
-                                    string errortext = HandleAuthExceptions(task.Exception).ToString();
-                                    loginValidationText.text = "nhnbh" +errortext;
-                                    Debug.Log(loginValidationText.text);
-                                    return;
-                                }
-                                Firebase.Auth.AuthResult result = task.Result;
-                                Debug.LogFormat("User signed in successfully: {0} ({1})",
-                                    result.User.DisplayName, result.User.UserId);
-                                WriteNewPlayer(
-                                    result.User.UserId,
-                                    signupUsernameInputField.text,
-                                    signupEmailInputField.text,
-                                    "",
-                                    ConvertNowToTimeStamp(),
-                                    0,
-                                    0,
-                                    0,
-                                    new string[] { "New Snapper" },
-                                    1
-                                );
-                            });
-                            ResetFields();
+                            Debug.LogError("SignInWithEmailAndPasswordAsync encountered an error: " + task.Exception);
+                            string errortext = HandleAuthExceptions(task.Exception).ToString();
+                            return;
                         }
-
-                        // Firebase user has been created.
                         Firebase.Auth.AuthResult result = task.Result;
-                        Debug.LogFormat("auth user created successfully: {0} ({1})",
+                        Debug.LogFormat("User signed in successfully: {0} ({1})",
                             result.User.DisplayName, result.User.UserId);
-                        });
-                    }
-                    else
-                    {
-                        signupValidationText.text = "Weak Password (Minimum 8 Characters, requires upper case letters, lower case letters, numbers)";
-                    }
+                        WriteNewPlayer(
+                            result.User.UserId,
+                            username,
+                            email,
+                            "",
+                            ConvertNowToTimeStamp(),
+                            0,
+                            0,
+                            0,
+                            new string[] { "New Snapper" },
+                            1
+                        );
+                        ResetFields();
+                    });
                 }
-                else
-                {
-                    signupValidationText.text = "Passwords do not match";
-                }
+
+                // Firebase user has been created.
+                Firebase.Auth.AuthResult result = task.Result;
+                Debug.LogFormat("auth user created successfully: {0} ({1})",
+                    result.User.DisplayName, result.User.UserId);
+                });
             }
             else
             {
-                signupValidationText.text = "Invalid Email";
+                signupValidationText.text = "Passwords do not match";
             }
         }
         else
@@ -189,40 +178,33 @@ public class DatabaseManager : MonoBehaviour
         if (!string.IsNullOrWhiteSpace(loginEmailInputField.text) &&
             !string.IsNullOrWhiteSpace(loginPasswordInputField.text))
         {
-            if (isValidEmail(loginEmailInputField.text))
-            {
-                auth.SignInWithEmailAndPasswordAsync(loginEmailInputField.text, loginPasswordInputField.text)
-                    .ContinueWithOnMainThread(task =>
+            auth.SignInWithEmailAndPasswordAsync(loginEmailInputField.text, loginPasswordInputField.text)
+                .ContinueWithOnMainThread(task =>
+                {
+                    if (task.IsCanceled)
                     {
-                        if (task.IsCanceled)
-                        {
-                            Debug.LogError("SignInWithEmailAndPasswordAsync was canceled.");
-                            return;
-                        }
+                        Debug.LogError("SignInWithEmailAndPasswordAsync was canceled.");
+                        return;
+                    }
 
-                        if (task.IsFaulted)
-                        {
-                            loginValidationText.text = HandleAuthExceptions(task.Exception);
-                            Debug.LogError("SignInWithEmailAndPasswordAsync encountered an error: " + task.Exception);
-                            return;
-                        }
+                    if (task.IsFaulted)
+                    {
+                        loginValidationText.text = HandleAuthExceptions(task.Exception);
+                        Debug.LogError("SignInWithEmailAndPasswordAsync encountered an error: " + task.Exception);
+                        return;
+                    }
 
-                        if (task.IsCompleted)
-                        {
-                            loginScreen.SetActive(false);
-                            homeScreen.SetActive(true);
-                            ResetFields();
-                        }
+                    if (task.IsCompleted)
+                    {
+                        loginScreen.SetActive(false);
+                        homeScreen.SetActive(true);
+                        ResetFields();
+                    }
 
-                        Firebase.Auth.AuthResult result = task.Result;
-                        Debug.LogFormat("User signed in successfully: {0} ({1})",
-                            result.User.DisplayName, result.User.UserId);
-                    });
-            }
-            else
-            {
-                loginValidationText.text = "Invalid Email";
-            }
+                    Firebase.Auth.AuthResult result = task.Result;
+                    Debug.LogFormat("User signed in successfully: {0} ({1})",
+                        result.User.DisplayName, result.User.UserId);
+                });
         }
         else
         {
@@ -234,48 +216,35 @@ public class DatabaseManager : MonoBehaviour
     {
         if (!string.IsNullOrWhiteSpace(resetPasswordEmailInputField.text))
         {
-            if (isValidEmail(resetPasswordEmailInputField.text))
+            auth.SendPasswordResetEmailAsync(resetPasswordEmailInputField.text).ContinueWithOnMainThread(task =>
             {
-                auth.SendPasswordResetEmailAsync(resetPasswordEmailInputField.text).ContinueWithOnMainThread(task =>
+                if (task.IsCanceled)
                 {
-                    if (task.IsCanceled)
-                    {
-                        Debug.LogError("SendPasswordResetEmailAsync was canceled.");
-                        return;
-                    }
+                    Debug.LogError("SendPasswordResetEmailAsync was canceled.");
+                    return;
+                }
 
-                    if (task.IsFaulted)
-                    {
-                        resetPasswordValidationText.text = HandleAuthExceptions(task.Exception);
-                        Debug.LogError("SendPasswordResetEmailAsync encountered an error: " + task.Exception);
-                        return;
-                    }
+                if (task.IsFaulted)
+                {
+                    resetPasswordValidationText.text = HandleAuthExceptions(task.Exception);
+                    Debug.LogError("SendPasswordResetEmailAsync encountered an error: " + task.Exception);
+                    return;
+                }
 
-                    if (task.IsCompleted)
-                    {
-                        loginScreen.SetActive(true);
-                        resetPasswordScreen.SetActive(false);
-                        ResetFields();
-                    }
+                if (task.IsCompleted)
+                {
+                    loginScreen.SetActive(true);
+                    resetPasswordScreen.SetActive(false);
+                    ResetFields();
+                }
 
-                    Debug.Log("Password reset email sent successfully.");
-                });
-            }
-            else
-            {
-                resetPasswordValidationText.text = "Invalid Email";
-            }
+                Debug.Log("Password reset email sent successfully.");
+            });
         }
         else
         {
             resetPasswordValidationText.text = "Please fill all fields";
         }
-    }
-
-    public void Logout()
-    {
-        Debug.Log("Log Out!");
-        auth.SignOut();
     }
 
     public void ResetFields()
@@ -294,41 +263,6 @@ public class DatabaseManager : MonoBehaviour
     
     
     //Account Validation Functions
-    
-    private bool isValidEmail(string email) {
-        try {
-            var addr = new MailAddress(email);
-            return true;
-        }
-        catch {
-            return false;
-        }
-    }
-
-    private bool ValidatePassword(string password)
-    {
-        // Set the minimum password length
-        int minLength = 8;
-
-        // Check the password length
-        if (password.Length < minLength)
-            return false;
-
-        // Check if the password contains at least one uppercase letter
-        if (!Regex.IsMatch(password, "[A-Z]"))
-            return false;
-
-        // Check if the password contains at least one lowercase letter
-        if (!Regex.IsMatch(password, "[a-z]"))
-            return false;
-
-        // Check if the password contains at least one digit
-        if (!Regex.IsMatch(password, "[0-9]"))
-            return false;
-        
-        return true;
-    }
-    
     public string HandleAuthExceptions(System.AggregateException e)
     {
         string validationText = "";
@@ -348,6 +282,12 @@ public class DatabaseManager : MonoBehaviour
                 case AuthError.UserNotFound:
                     validationText += "User does not exist, please create an account";
                     break;
+                case AuthError.InvalidEmail:
+                    validationText += "Invalid Email";
+                    break;
+                case AuthError.WeakPassword:
+                    validationText += "Weak Password (Minimum 8 Characters, requires upper case letters, lower case letters, numbers)";
+                    break;
                 case AuthError.EmailAlreadyInUse:
                     validationText += "Email is already in use, try logging in";
                     break;
@@ -358,7 +298,7 @@ public class DatabaseManager : MonoBehaviour
                     validationText += "Failed to login...";
                     break;
                 default:
-                    validationText += "Issue in authentication" + errorCode;
+                    validationText += "Issue in authentication: " + errorCode;
                     break;
             }
         }
