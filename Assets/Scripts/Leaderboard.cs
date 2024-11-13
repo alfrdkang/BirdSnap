@@ -5,13 +5,17 @@ using System;
 public class Leaderboard
 {
     public string name;
-    public float highScore;
+    public int highScore;
+    public int birdsSnapped;
+    public float accuracy;
     public string updatedDate;
 
-    public Leaderboard(string name, float highScore, string updatedDate)
+    public Leaderboard(string name, int highScore, int birdsSnapped, float accuracy, string updatedDate)
     {
         this.name = name;
         this.highScore = highScore;
+        this.birdsSnapped = birdsSnapped;
+        this.accuracy = accuracy;
         this.updatedDate = updatedDate;
     }
 }

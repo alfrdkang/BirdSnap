@@ -19,7 +19,7 @@ public class ProfileDatabaseController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dateCreatedText;
     [SerializeField] private TextMeshProUGUI emailText;
     
-    [SerializeField] private GameObject homeScreen;
+    [SerializeField] private GameObject loginScreen;
     [SerializeField] private GameObject profileScreen;
     
     [SerializeField] private GameObject updateUsernamePanel;
@@ -32,9 +32,6 @@ public class ProfileDatabaseController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI updatePasswordValidationText;
     [SerializeField] private TMP_InputField updatePasswordInputField;
     
-    
-    // Start is called before the first frame update
-
     public void DisplayProfile()
     {
         reference = FirebaseDatabase.DefaultInstance.RootReference;
@@ -82,8 +79,7 @@ public class ProfileDatabaseController : MonoBehaviour
         childUpdates["players/" + user.UserId + "/name/"] = newUsername;
 
         reference.UpdateChildrenAsync(childUpdates);
-        DisplayProfile();
-        ClosePanel(("Your new username is " + newUsername + "!"), updateUsernameValidationText, updateUsernamePanel);
+        StartCoroutine(ClosePanel(("Your new username is " + newUsername + "!"), updateUsernameValidationText, updateUsernamePanel, false));
     }
 
     public void UpdateEmail()
@@ -114,8 +110,7 @@ public class ProfileDatabaseController : MonoBehaviour
                     childUpdates["players/" + user.UserId + "/email/"] = newEmail;
 
                     reference.UpdateChildrenAsync(childUpdates);
-                    DisplayProfile();
-                    ClosePanel(("Your new email is " + newEmail + "!"), updateEmailValidationText, updateEmailPanel);
+                    StartCoroutine(ClosePanel("Your new email is " + newEmail + "!", updateEmailValidationText, updateEmailPanel, false));
                 }
             });
         }
@@ -143,8 +138,7 @@ public class ProfileDatabaseController : MonoBehaviour
                 if (task.IsCompleted)
                 {
                     Debug.Log("Password updated successfully.");
-                    ClosePanel("Your password has been updated, please login again", updatePasswordValidationText, updatePasswordPanel);
-                    Logout();
+                    StartCoroutine(ClosePanel("Your password has been updated, please login again", updatePasswordValidationText, updatePasswordPanel, true));
                 }
             });
         }
@@ -170,14 +164,16 @@ public class ProfileDatabaseController : MonoBehaviour
         
         //Delete Database User
         reference.Child("players").Child(user.UserId).RemoveValueAsync();
+        loginScreen.SetActive(true);
+        profileScreen.SetActive(false);
     }
 
     public void Logout()
     {
         Debug.Log("Log Out!");
-        auth.SignOut();
-        homeScreen.SetActive(true);
+        loginScreen.SetActive(true);
         profileScreen.SetActive(false);
+        auth.SignOut();
     }
     
     //validation/exceptions
@@ -223,11 +219,27 @@ public class ProfileDatabaseController : MonoBehaviour
         return validationText;
     }
 
-    private IEnumerator ClosePanel(string messageText, TextMeshProUGUI panelText, GameObject panel)
+    public void ClearFields()
+    {
+        updateEmailInputField.text = "";
+        updatePasswordInputField.text = "";
+        updateUsernameInputField.text = "";
+        updateEmailValidationText.text = "";
+        updatePasswordValidationText.text = "";
+        updateUsernameValidationText.text = "";
+    }
+
+    private IEnumerator ClosePanel(string messageText, TextMeshProUGUI panelText, GameObject panel, bool logOut)
     {
         panelText.color = Color.green;
         panelText.text = messageText;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1);
         panel.SetActive(false);
+        DisplayProfile();
+
+        if (logOut)
+        {
+            Logout();
+        }
     }
 }

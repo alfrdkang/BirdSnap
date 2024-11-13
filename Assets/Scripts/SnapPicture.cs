@@ -20,6 +20,7 @@ public class SnapPicture : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && GameManager.instance.gameStarted && canSnap)
         {
             canSnap = false;
+            GameManager.instance.snapCount++;
             
             RaycastHit2D hit = Physics2D.Raycast(cam.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
             
@@ -40,7 +41,6 @@ public class SnapPicture : MonoBehaviour
             }
             else
             {
-                GameManager.instance.birdsSnapped++;
                 cam.transform.position = cam.ScreenToWorldPoint(Input.mousePosition);
                 cam.orthographicSize = 1;
                 snapText.text = "Miss!";
@@ -57,7 +57,7 @@ public class SnapPicture : MonoBehaviour
         snapText.text = "";
         if (bird != null)
         {
-            bird.GetComponent<Bird>().speed = bird.GetComponent<Bird>().originalSpeed;
+            bird.GetComponent<Bird>().speed = 12;
         }
         
         canSnap = true;

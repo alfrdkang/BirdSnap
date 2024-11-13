@@ -14,14 +14,17 @@ using Firebase;
 using Firebase.Extensions;
 using Unity.VisualScripting;
 using UnityEngine.Rendering;
+using Object = System.Object;
 
 public class DatabaseManager : MonoBehaviour
 {
+    public static DatabaseManager instance;
+    
     private DatabaseReference reference;
     private FirebaseAuth auth;
     private FirebaseUser user;
 
-    private int numberOfPlayers;
+    public int numberOfPlayers;
     
     [SerializeField] private GameObject homeScreen;
     [SerializeField] private GameObject signupScreen;
@@ -43,17 +46,36 @@ public class DatabaseManager : MonoBehaviour
     //Reset Password
     [SerializeField] private TMP_InputField resetPasswordEmailInputField;
     [SerializeField] private TextMeshProUGUI resetPasswordValidationText;
+    
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
 
-    void Start()
+    private void Start()
     {
         reference = FirebaseDatabase.DefaultInstance.RootReference;
         auth = FirebaseAuth.DefaultInstance;
         auth.StateChanged += AuthStateChanged;
         
-        //NOTE: remove on build
+        
         if (auth.CurrentUser != null)
         {
-            auth.SignOut();
+            //update last login
+            Dictionary<string, Object> childUpdates = new Dictionary<string, Object>();
+            childUpdates["players/" + auth.CurrentUser.UserId + "/lastLoginDate/"] = ConvertNowToTimeStamp();
+
+            reference.UpdateChildrenAsync(childUpdates);
+            
+            auth.SignOut(); //NOTE: remove on build, add auto switch to homescreen if signed in
         }
 
         AuthStateChanged(this, null);
@@ -143,13 +165,15 @@ public class DatabaseManager : MonoBehaviour
                             result.User.UserId,
                             username,
                             email,
-                            "",
+                            ConvertNowToTimeStamp(),
+                            ConvertNowToTimeStamp(),
                             ConvertNowToTimeStamp(),
                             0,
                             0,
                             0,
+                            0, 
                             new string[] { "New Snapper" },
-                            1
+                            100f
                         );
                         ResetFields();
                     });
@@ -306,24 +330,63 @@ public class DatabaseManager : MonoBehaviour
     }
     
     //Db Writing Functions
-    private void WriteNewPlayer(string uid, string name, string email, string creationDate, string lastLoginDate, int highScore, int gamesPlayed, int birdsSnapped, string[] achievements, float accuracy)
+    private void WriteNewPlayer(string uid, string name, string email, string creationDate, string lastLoginDate, string updatedDate, int highScore, int gamesPlayed, int birdsSnapped, int totalSnaps, string[] achievements, float accuracy)
     {
-        PlayerData player = new PlayerData(name, email, creationDate, lastLoginDate, highScore, gamesPlayed, birdsSnapped, achievements, accuracy);
+        PlayerData player = new PlayerData(name, email, creationDate, lastLoginDate, highScore, gamesPlayed, birdsSnapped, totalSnaps, achievements, accuracy);
+        Leaderboard leaderboardEntry = new Leaderboard(name, highScore, birdsSnapped, accuracy, updatedDate);
         
-        string json = JsonUtility.ToJson(player);
-        Debug.Log(json);
-        reference.Child("players").Child(uid).SetRawJsonValueAsync(json);
+        string playerJson = JsonUtility.ToJson(player);
+        string leaderboardJson = JsonUtility.ToJson(leaderboardEntry);
+        Debug.Log(playerJson);
+        Debug.Log(leaderboardJson);
+        reference.Child("players").Child(uid).SetRawJsonValueAsync(playerJson);
+        reference.Child("leaderboard").Child(uid).SetRawJsonValueAsync(leaderboardJson);
     }
 
-    public void WriteNewScore(int score)
+    public void UpdatePlayData(int score, float birdsSnapped, float totalSnaps)
     {
-        DatabaseReference dbReference = FirebaseDatabase.DefaultInstance.RootReference;
-        dbReference.Child("players/" + user.UserId + "/score").SetValueAsync(score);
-        DatabaseReference reference =
-            FirebaseDatabase.DefaultInstance.GetReference("players/");
-        Dictionary<string, object> childUpdates = new Dictionary<string, object>();
-        childUpdates[user.UserId + "/score"] = score;
-        reference.UpdateChildrenAsync(childUpdates);
+        reference.Child("players").Child(user.UserId).GetValueAsync().ContinueWithOnMainThread(task =>
+        {
+            if (task.IsCanceled)
+            {
+                Debug.LogError("UpdatePlayData GetValueAsync was canceled.");
+                return;
+            }
+
+            if (task.IsFaulted)
+            {
+                Debug.LogError("UpdatePlayData GetValueAsync encountered an error: " + task.Exception);
+                return;
+            }
+
+            if (task.IsCompleted)
+            {
+                DataSnapshot snapshot = task.Result;
+                int highScore = int.Parse(snapshot.Child("highScore").Value.ToString());
+                int prevBirdsSnapped = int.Parse(snapshot.Child("birdsSnapped").Value.ToString());
+                int prevTotalSnaps = int.Parse(snapshot.Child("totalSnaps").Value.ToString());
+                int gamesPlayed = int.Parse(snapshot.Child("gamesPlayed").Value.ToString());
+                
+                Dictionary<string, Object> childUpdates = new Dictionary<string, Object>();
+                
+                childUpdates["players/" + user.UserId + "/gamesPlayed/"] = gamesPlayed+1;
+                childUpdates["players/" + user.UserId + "/birdsSnapped/"] = prevBirdsSnapped + birdsSnapped;
+                childUpdates["players/" + user.UserId + "/totalSnaps/"] = prevTotalSnaps + totalSnaps;
+                childUpdates["players/" + user.UserId + "/accuracy/"] = Math.Round(((prevBirdsSnapped + birdsSnapped) / (prevTotalSnaps + totalSnaps) * 100),2);
+                
+                childUpdates["leaderboard/" + user.UserId + "/birdsSnapped/"] = prevBirdsSnapped + birdsSnapped;
+                childUpdates["leaderboard/" + user.UserId + "/accuracy/"] = Math.Round(((prevBirdsSnapped + birdsSnapped) / (prevTotalSnaps + totalSnaps) * 100),2);
+                childUpdates["leaderboard/" + user.UserId + "/updatedDate"] = ConvertNowToTimeStamp();
+                
+                if (score > highScore)
+                {
+                    childUpdates["players/" + user.UserId + "/highScore/"] = score;
+                    childUpdates["leaderboard/" + user.UserId + "/highScore/"] = score;
+                }
+
+                reference.UpdateChildrenAsync(childUpdates);
+            }
+        });
     }
     
     public string ConvertNowToTimeStamp()
