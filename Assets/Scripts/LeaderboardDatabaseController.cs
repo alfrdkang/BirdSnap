@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Firebase;
 using Firebase.Auth;
 using Firebase.Database;
@@ -15,9 +16,18 @@ public class LeaderboardDatabaseController : MonoBehaviour
     private DatabaseReference reference;
     private FirebaseAuth auth;
     private FirebaseUser user;
+
+    private int sortIndex = 0;
     
     [SerializeField] private GameObject leaderboardPanel;
     [SerializeField] private GameObject leaderboardEntryPrefab;
+    
+    [SerializeField] private Sprite sortSpriteInactive;
+    [SerializeField] private Sprite sortSpriteActive;
+    [SerializeField] private Sprite userLeaderboardBgSprite;
+    [SerializeField] private Image hScoreSortImg;
+    [SerializeField] private Image birdsSnappedSortImg;
+    [SerializeField] private Image accuracySortImg;
     
     [SerializeField] private TextMeshProUGUI profileUsernameText;
     [SerializeField] private TextMeshProUGUI profileHighscoreText;
@@ -63,55 +73,219 @@ public class LeaderboardDatabaseController : MonoBehaviour
                 }
             });
         }
-        
-        FirebaseDatabase.DefaultInstance
+
+        if (sortIndex == 0) // Highscore Sort
+        {
+            hScoreSortImg.sprite = sortSpriteActive;
+            birdsSnappedSortImg.sprite = sortSpriteInactive;
+            accuracySortImg.sprite = sortSpriteInactive;
+            
+            FirebaseDatabase.DefaultInstance
+            .GetReference("players").OrderByChild("highScore").LimitToLast(30)
+            .ValueChanged += HandleValueChanged;
+
+            void HandleValueChanged(object sender, ValueChangedEventArgs args) {
+                if (args.DatabaseError != null) {
+                    Debug.LogError(args.DatabaseError.Message);
+                    return;
+                } 
+                if (args.Snapshot != null && args.Snapshot.ChildrenCount > 0)
+                {
+                    //reset existing leaderboard child
+                    foreach (Transform child in leaderboardPanel.transform)
+                    {
+                        Destroy(child.gameObject);
+                    }
+
+                    int i = 0;
+                    List<DataSnapshot> childSnapshots = new List<DataSnapshot>(args.Snapshot.Children);
+                    childSnapshots.Reverse();
+                    
+                    //instantiate leaderboard entries
+                    foreach (var childSnapshot in args.Snapshot.Children)
+                    {
+                        GameObject leaderboardEntry = Instantiate(leaderboardEntryPrefab, leaderboardPanel.transform);
+                        
+                        //check if user
+                        if (childSnapshots[i].Key == auth.CurrentUser.UserId)
+                        {
+                            leaderboardEntry.GetComponent<Image>().sprite = userLeaderboardBgSprite;
+                        }
+                        
+                        //special colours for top 3
+                        if ((i + 1) == 1)
+                        {
+                            leaderboardEntry.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().color = Color.yellow;
+                        } else if ((i + 1) == 2)
+                        {   
+                            leaderboardEntry.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().color = Color.white;
+                        } else if ((i + 1) == 3)
+                        {
+                            leaderboardEntry.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().color = new Color32(145, 85, 77,255);
+                        }
+                        
+                        leaderboardEntry.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text =
+                            "#" + (i+1);
+                        //check if user
+                        if (childSnapshots[i].Key == user.UserId)
+                        {
+                            leaderboardEntry.GetComponent<Image>().sprite = userLeaderboardBgSprite;
+                            leaderboardEntry.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "(YOU) " +
+                                childSnapshots[i].Child("name").Value.ToString();
+                        }
+                        else
+                        {
+                            leaderboardEntry.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text =
+                                childSnapshots[i].Child("name").Value.ToString();
+                        }
+                        leaderboardEntry.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text =
+                            "High Score: " + childSnapshots[i].Child("highScore").Value;
+                        i++;
+                    }
+                }
+            }
+        } 
+        else if (sortIndex == 1) // Birds Snapped Sort
+        {
+            hScoreSortImg.sprite = sortSpriteInactive;
+            birdsSnappedSortImg.sprite = sortSpriteActive;
+            accuracySortImg.sprite = sortSpriteInactive;
+            
+            FirebaseDatabase.DefaultInstance
+            .GetReference("players").OrderByChild("birdsSnapped").LimitToLast(30)
+            .ValueChanged += HandleValueChanged;
+
+            void HandleValueChanged(object sender, ValueChangedEventArgs args) {
+                if (args.DatabaseError != null) {
+                    Debug.LogError(args.DatabaseError.Message);
+                    return;
+                } 
+                if (args.Snapshot != null && args.Snapshot.ChildrenCount > 0)
+                {
+                    //reset existing leaderboard child
+                    foreach (Transform child in leaderboardPanel.transform)
+                    {
+                        Destroy(child.gameObject);
+                    }
+
+                    int i = 0;
+                    List<DataSnapshot> childSnapshots = new List<DataSnapshot>(args.Snapshot.Children);
+                    childSnapshots.Reverse();
+                    
+                    //instantiate leaderboard entries
+                    foreach (var childSnapshot in args.Snapshot.Children)
+                    {
+                        GameObject leaderboardEntry = Instantiate(leaderboardEntryPrefab, leaderboardPanel.transform);
+                        
+                        //check if user
+                        if (childSnapshots[i].Key == user.UserId)
+                        {
+                            leaderboardEntry.GetComponent<Image>().sprite = userLeaderboardBgSprite;
+                        }
+                        
+                        //special colours for top 3
+                        if ((i + 1) == 1)
+                        {
+                            leaderboardEntry.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().color = Color.yellow;
+                        } else if ((i + 1) == 2)
+                        {   
+                            leaderboardEntry.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().color = Color.white;
+                        } else if ((i + 1) == 3)
+                        {
+                            leaderboardEntry.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().color = new Color32(145, 85, 77,255);
+                        }
+                        
+                        leaderboardEntry.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text =
+                            "#" + (i+1);
+                        //check if user
+                        if (childSnapshots[i].Key == user.UserId)
+                        {
+                            leaderboardEntry.GetComponent<Image>().sprite = userLeaderboardBgSprite;
+                            leaderboardEntry.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "(YOU) " +
+                                childSnapshots[i].Child("name").Value.ToString();
+                        }
+                        else
+                        {
+                            leaderboardEntry.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text =
+                                childSnapshots[i].Child("name").Value.ToString();
+                        }
+                        leaderboardEntry.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text =
+                            "Birds Snapped: " + childSnapshots[i].Child("birdsSnapped").Value;
+                        i++;
+                    }
+                }
+            }
+        } else if (sortIndex == 2) // Accuracy Sort
+        {
+            hScoreSortImg.sprite = sortSpriteInactive;
+            birdsSnappedSortImg.sprite = sortSpriteInactive;
+            accuracySortImg.sprite = sortSpriteActive;
+            
+            FirebaseDatabase.DefaultInstance
             .GetReference("players").OrderByChild("accuracy").LimitToLast(30)
             .ValueChanged += HandleValueChanged;
 
-        void HandleValueChanged(object sender, ValueChangedEventArgs args) {
-            if (args.DatabaseError != null) {
-                Debug.LogError(args.DatabaseError.Message);
-                return;
-            } 
-            if (args.Snapshot != null && args.Snapshot.ChildrenCount > 0)
-            {
-                //reset existing leaderboard child
-                foreach (Transform child in leaderboardPanel.transform)
+            void HandleValueChanged(object sender, ValueChangedEventArgs args) {
+                if (args.DatabaseError != null) {
+                    Debug.LogError(args.DatabaseError.Message);
+                    return;
+                } 
+                if (args.Snapshot != null && args.Snapshot.ChildrenCount > 0)
                 {
-                    Destroy(child.gameObject);
-                }
-
-                int i = 0;
-                List<DataSnapshot> childSnapshots = new List<DataSnapshot>(args.Snapshot.Children);
-                childSnapshots.Reverse();
-                
-                //instantiate leaderboard entries
-                foreach (var childSnapshot in args.Snapshot.Children)
-                {
-                    GameObject leaderboardEntry = Instantiate(leaderboardEntryPrefab, leaderboardPanel.transform);
-                    
-                    //special colours for top 3
-                    if ((i + 1) == 1)
+                    //reset existing leaderboard child
+                    foreach (Transform child in leaderboardPanel.transform)
                     {
-                        leaderboardEntry.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().color = Color.yellow;
-                    } else if ((i + 1) == 2)
-                    {   
-                        leaderboardEntry.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().color = Color.white;
-                    } else if ((i + 1) == 3)
-                    {
-                        leaderboardEntry.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().color = new Color32(145, 85, 77,255);
+                        Destroy(child.gameObject);
                     }
+
+                    int i = 0;
+                    List<DataSnapshot> childSnapshots = new List<DataSnapshot>(args.Snapshot.Children);
+                    childSnapshots.Reverse();
                     
-                    leaderboardEntry.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text =
-                        "#" + (i+1);
-                    leaderboardEntry.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text =
-                        childSnapshots[i].Child("name").Value.ToString();
-                    leaderboardEntry.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text =
-                        "Accuracy: " + childSnapshots[i].Child("accuracy").Value+"%";
-                    i++;
+                    //instantiate leaderboard entries
+                    foreach (var childSnapshot in args.Snapshot.Children)
+                    {
+                        GameObject leaderboardEntry = Instantiate(leaderboardEntryPrefab, leaderboardPanel.transform);
+                        
+                        //special colours for top 3
+                        if ((i + 1) == 1)
+                        {
+                            leaderboardEntry.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().color = Color.yellow;
+                        } else if ((i + 1) == 2)
+                        {   
+                            leaderboardEntry.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().color = Color.white;
+                        } else if ((i + 1) == 3)
+                        {
+                            leaderboardEntry.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().color = new Color32(145, 85, 77,255);
+                        }
+                        
+                        leaderboardEntry.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text =
+                            "#" + (i+1);
+                        //check if user
+                        if (childSnapshots[i].Key == user.UserId)
+                        {
+                            leaderboardEntry.GetComponent<Image>().sprite = userLeaderboardBgSprite;
+                            leaderboardEntry.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "(YOU) " +
+                                childSnapshots[i].Child("name").Value.ToString();
+                        }
+                        else
+                        {
+                            leaderboardEntry.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text =
+                                childSnapshots[i].Child("name").Value.ToString();
+                        }
+                        leaderboardEntry.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text =
+                            "Accuracy: " + childSnapshots[i].Child("accuracy").Value+"%";
+                        i++;
+                    }
                 }
             }
         }
+    }
+
+    public void LeaderboardSortIndex(int index)
+    {
+        sortIndex = index;
+        DisplayLeaderboard();
     }
     
     //validation&exceptions
