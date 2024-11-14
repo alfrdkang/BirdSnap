@@ -10,6 +10,10 @@ public class SnapPicture : MonoBehaviour
     public Vector2 originalCamPos;
     
     public bool canSnap = true;
+    
+    [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioClip snapClip;
+    [SerializeField] private AudioClip snapSuccessClip;
 
     void Start()
     {
@@ -19,6 +23,7 @@ public class SnapPicture : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && GameManager.instance.gameStarted && canSnap)
         {
+            sfxSource.PlayOneShot(snapClip);
             canSnap = false;
             GameManager.instance.snapCount++;
             
@@ -28,6 +33,7 @@ public class SnapPicture : MonoBehaviour
             {
                 if (hit.collider.gameObject.GetComponent<Bird>().snapped == false)
                 {
+                    sfxSource.PlayOneShot(snapSuccessClip);
                     GameManager.instance.BirdSnapped(hit.collider.gameObject.GetComponent<Bird>());
 
                     Vector3 clickPoint = new Vector3(hit.collider.transform.position.x, hit.collider.transform.position.y-0.2f, -10);

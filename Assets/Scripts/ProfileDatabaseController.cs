@@ -173,7 +173,10 @@ public class ProfileDatabaseController : MonoBehaviour
         Debug.Log("Log Out!");
         loginScreen.SetActive(true);
         profileScreen.SetActive(false);
-        auth.SignOut();
+        if (auth.CurrentUser != null)
+        {
+            auth.SignOut();
+        }
     }
     
     //validation/exceptions

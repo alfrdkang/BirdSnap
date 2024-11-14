@@ -7,6 +7,8 @@ using UnityEngine;
 public class Timer : MonoBehaviour
 {
     public static Timer instance;
+
+    public bool timerRunning = false;
     
     [SerializeField] private TextMeshProUGUI timerText;
     
@@ -25,6 +27,7 @@ public class Timer : MonoBehaviour
 
     public IEnumerator StartTimer(float targetTime)
     {
+        timerRunning = true;
         while (targetTime > 0)
         {
             targetTime -= 1;
@@ -34,6 +37,7 @@ public class Timer : MonoBehaviour
             timerText.text = string.Format("{00:00}:{01:00}", minutes,seconds);
             yield return new WaitForSeconds(1);
         }
+        timerRunning = false;
         GameManager.instance.EndGame();
     }
 }

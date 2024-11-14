@@ -7,11 +7,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public int score;
-    public float accuracy;
     public int birdsSnapped;
     public int snapCount;
     
     public bool gameStarted = false;
+    public float gameDuration = 45f;
     
     [SerializeField] private GameObject hud;
     [SerializeField] private GameObject gameOverScreen;
@@ -19,8 +19,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject gameOverBirdsSnap;
     [SerializeField] private GameObject gameOverAccuracy;
     
+    [SerializeField] private GameObject spawnedBirds;
+    
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI timerText;
+    
+    [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioClip gameEndClip;
+    [SerializeField] private AudioClip buttonClickClip;
 
     private void Awake()
     {
@@ -35,14 +41,38 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void StartGame(int duration)
+    public void StartGame()
     {
+        //if a previous game is running
+        StopAllCoroutines();
+        foreach (Transform child in spawnedBirds.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        scoreText.text = "Score: 0";
+        score = 0;
+        birdsSnapped = 0;
+        snapCount = 0;
+        
+        hud.SetActive(true);
         gameStarted = true;
-        StartCoroutine(Timer.instance.StartTimer(duration));
+        
+        //restart bgm
+        BGMController.instance.PlayAmbience();
+        
+        StartCoroutine(Timer.instance.StartTimer(gameDuration));
+    }
+
+    public void ButtonSFX()
+    {
+        sfxSource.PlayOneShot(buttonClickClip);
     }
 
     public void EndGame()
     {
+        BGMController.instance.PlayMenuBGM();
+        sfxSource.PlayOneShot(gameEndClip);
         gameStarted = false;
         hud.SetActive(false);
         gameOverScreen.SetActive(true);

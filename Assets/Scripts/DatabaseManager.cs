@@ -173,7 +173,7 @@ public class DatabaseManager : MonoBehaviour
                             0,
                             0, 
                             new string[] { "New Snapper" },
-                            100f
+                            0f
                         );
                         ResetFields();
                     });

@@ -9,6 +9,7 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject hud;
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject gameOverMenu;
 
     public bool isPaused = false;
 
@@ -29,6 +30,7 @@ public class MenuManager : MonoBehaviour
 
     public void Pause()
     {
+        BGMController.instance.PauseMusic();
         hud.SetActive(false);
         pauseMenu.SetActive(true);
         
@@ -38,6 +40,7 @@ public class MenuManager : MonoBehaviour
 
     public void Resume()
     {
+        BGMController.instance.PlayMusic();
         hud.SetActive(true);
         pauseMenu.SetActive(false);
         
@@ -49,15 +52,16 @@ public class MenuManager : MonoBehaviour
     {
         GameManager.instance.GetComponent<SnapPicture>().canSnap = true;
     }
-    
-    public void Play()
-    {
-        hud.gameObject.SetActive(true);
-    }
 
     public void Restart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        pauseMenu.SetActive(false);
+        gameOverMenu.SetActive(false);
+        
+        Time.timeScale = 1;
+        ResumeSnap();
+        
+        GameManager.instance.StartGame();
     }
 
     public void Quit()
