@@ -29,18 +29,25 @@ public class MenuManager : MonoBehaviour
 
     public void Pause()
     {
-        hud.SetActive(true);
-        pauseMenu.SetActive(false);
+        hud.SetActive(false);
+        pauseMenu.SetActive(true);
         
+        GameManager.instance.GetComponent<SnapPicture>().canSnap = false;
         Time.timeScale = 0;
     }
 
     public void Resume()
     {
-        hud.SetActive(false);
-        pauseMenu.SetActive(true);
+        hud.SetActive(true);
+        pauseMenu.SetActive(false);
         
         Time.timeScale = 1;
+        Invoke("ResumeSnap", 1f);
+    }
+
+    private void ResumeSnap()
+    {
+        GameManager.instance.GetComponent<SnapPicture>().canSnap = true;
     }
     
     public void Play()

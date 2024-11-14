@@ -81,7 +81,7 @@ public class LeaderboardDatabaseController : MonoBehaviour
             accuracySortImg.sprite = sortSpriteInactive;
             
             FirebaseDatabase.DefaultInstance
-            .GetReference("players").OrderByChild("highScore").LimitToLast(30)
+            .GetReference("leaderboard").OrderByChild("highScore").LimitToLast(30)
             .ValueChanged += HandleValueChanged;
 
             void HandleValueChanged(object sender, ValueChangedEventArgs args) {
@@ -152,7 +152,7 @@ public class LeaderboardDatabaseController : MonoBehaviour
             accuracySortImg.sprite = sortSpriteInactive;
             
             FirebaseDatabase.DefaultInstance
-            .GetReference("players").OrderByChild("birdsSnapped").LimitToLast(30)
+            .GetReference("leaderboard").OrderByChild("birdsSnapped").LimitToLast(30)
             .ValueChanged += HandleValueChanged;
 
             void HandleValueChanged(object sender, ValueChangedEventArgs args) {
@@ -222,7 +222,7 @@ public class LeaderboardDatabaseController : MonoBehaviour
             accuracySortImg.sprite = sortSpriteActive;
             
             FirebaseDatabase.DefaultInstance
-            .GetReference("players").OrderByChild("accuracy").LimitToLast(30)
+            .GetReference("leaderboard").OrderByChild("accuracy").LimitToLast(30)
             .ValueChanged += HandleValueChanged;
 
             void HandleValueChanged(object sender, ValueChangedEventArgs args) {
