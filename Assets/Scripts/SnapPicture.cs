@@ -41,6 +41,7 @@ public class SnapPicture : MonoBehaviour
                     cam.orthographicSize = 1;
                     hit.collider.gameObject.GetComponent<Bird>().speed = 0;
                     hit.collider.gameObject.GetComponent<Bird>().snapped = true;
+                    hit.collider.gameObject.GetComponent<SpriteRenderer>().sortingOrder = 6;
                     snapText.text = hit.collider.GetComponent<Bird>().birdName + " Caught!";
                     StartCoroutine(ZoomOut(hit.collider.gameObject));
                 }
@@ -63,7 +64,7 @@ public class SnapPicture : MonoBehaviour
         snapText.text = "";
         if (bird != null)
         {
-            bird.GetComponent<Bird>().speed = 12;
+            bird.GetComponent<Bird>().speed = 20;
         }
         
         canSnap = true;

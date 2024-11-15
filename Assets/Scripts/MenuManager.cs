@@ -10,6 +10,9 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject hud;
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject gameOverMenu;
+    [SerializeField] private GameObject homeMenu;
+    
+    [SerializeField] private GameObject spawnedBirds;
 
     public bool isPaused = false;
 
@@ -20,10 +23,12 @@ public class MenuManager : MonoBehaviour
             if (isPaused)
             {
                 Resume();
+                isPaused = false;
             }
             else
             {
                 Pause();
+                isPaused = true;
             }
         }
     }
@@ -55,6 +60,7 @@ public class MenuManager : MonoBehaviour
 
     public void Restart()
     {
+        isPaused = false;
         pauseMenu.SetActive(false);
         gameOverMenu.SetActive(false);
         
@@ -64,9 +70,28 @@ public class MenuManager : MonoBehaviour
         GameManager.instance.StartGame();
     }
 
+    public void Home()
+    {
+        isPaused = false;
+        pauseMenu.SetActive(false);
+        homeMenu.SetActive(true);
+        
+        Time.timeScale = 1;
+        
+        //if a previous game is running
+        StopAllCoroutines();
+        foreach (Transform child in spawnedBirds.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        
+        GameManager.instance.gameStarted = false;
+        BGMController.instance.PlayMenuBGM();
+    }
+
     public void Quit()
     {
         Application.Quit();
-        EditorApplication.isPlaying = false;
+        // EditorApplication.isPlaying = false;
     }
 }

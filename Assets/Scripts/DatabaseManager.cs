@@ -75,7 +75,7 @@ public class DatabaseManager : MonoBehaviour
 
             reference.UpdateChildrenAsync(childUpdates);
             
-            auth.SignOut(); //NOTE: remove on build, add auto switch to homescreen if signed in
+            // auth.SignOut(); //NOTE: remove on build, add auto switch to homescreen if signed in
         }
 
         AuthStateChanged(this, null);

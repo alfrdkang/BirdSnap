@@ -68,7 +68,7 @@ public class LeaderboardDatabaseController : MonoBehaviour
                     profileUsernameText.text = username;
                     profileHighscoreText.text = "High Score: " + highScore;
                     profileBirdsSnappedText.text = "Birds Snapped: " + birdsSnapped;
-                    profileAccuracyText.text = "Accuracy: " + accuracy;
+                    profileAccuracyText.text = "Accuracy: " + accuracy + "%";
 
                 }
             });

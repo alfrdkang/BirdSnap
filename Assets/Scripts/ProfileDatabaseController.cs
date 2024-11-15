@@ -77,6 +77,7 @@ public class ProfileDatabaseController : MonoBehaviour
         //Update Database Username
         Dictionary<string, Object> childUpdates = new Dictionary<string, Object>();
         childUpdates["players/" + user.UserId + "/name/"] = newUsername;
+        childUpdates["leaderboard/" + user.UserId + "/name/"] = newUsername;
 
         reference.UpdateChildrenAsync(childUpdates);
         StartCoroutine(ClosePanel(("Your new username is " + newUsername + "!"), updateUsernameValidationText, updateUsernamePanel, false));
