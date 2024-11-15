@@ -75,6 +75,10 @@ public class DatabaseManager : MonoBehaviour
 
             reference.UpdateChildrenAsync(childUpdates);
             
+            loginScreen.SetActive(false);
+            homeScreen.SetActive(true);
+            ResetFields();
+            
             // auth.SignOut(); //NOTE: remove on build, add auto switch to homescreen if signed in
         }
 
