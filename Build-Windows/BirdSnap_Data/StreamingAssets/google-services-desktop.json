@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "822789407724",
+    "firebase_url": "https://birdsnap-9221f-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "birdsnap-9221f",
+    "storage_bucket": "birdsnap-9221f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:822789407724:android:692489aa6ea9e157e8b6c9",
+        "android_client_info": {
+          "package_name": "com.alfred.birdsnap"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZnIaJ0ZWKCrgnANfw5lxp4KQMPAL33kY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
