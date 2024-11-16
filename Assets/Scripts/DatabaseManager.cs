@@ -273,12 +273,11 @@ public class DatabaseManager : MonoBehaviour
 
                 if (task.IsCompleted)
                 {
+                    Debug.Log("Password reset email sent successfully.");
                     loginScreen.SetActive(true);
                     resetPasswordScreen.SetActive(false);
                     ResetFields();
                 }
-
-                Debug.Log("Password reset email sent successfully.");
             });
         }
         else

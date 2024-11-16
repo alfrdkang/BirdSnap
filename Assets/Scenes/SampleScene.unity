@@ -7491,9 +7491,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1224941128}
-        m_TargetAssemblyTypeName: DatabaseManager, Assembly-CSharp
-        m_MethodName: ResetPassword
+      - m_Target: {fileID: 2075225461}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: ButtonSFX
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7503,9 +7503,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2075225461}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ButtonSFX
+      - m_Target: {fileID: 1224941128}
+        m_TargetAssemblyTypeName: DatabaseManager, Assembly-CSharp
+        m_MethodName: ResetPassword
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -23608,12 +23608,12 @@ MonoBehaviour:
   snapCount: 0
   gameStarted: 0
   gameDuration: 45
-  hud: {fileID: 1529304444}
   gameOverScreen: {fileID: 703265413}
   gameOverScore: {fileID: 448684680}
   gameOverBirdsSnap: {fileID: 1665053983}
   gameOverAccuracy: {fileID: 1672251879}
   spawnedBirds: {fileID: 1464022554}
+  hud: {fileID: 1529304444}
   scoreText: {fileID: 2005017455}
   timerText: {fileID: 192135880}
   sfxSource: {fileID: 927059083}

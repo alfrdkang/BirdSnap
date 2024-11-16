@@ -172,18 +172,24 @@ public class ProfileDatabaseController : MonoBehaviour
         
         //Delete Database User
         reference.Child("players").Child(user.UserId).RemoveValueAsync();
+        reference.Child("leaderboard").Child(user.UserId).RemoveValueAsync();
         loginScreen.SetActive(true);
         profileScreen.SetActive(false);
     }
 
     public void Logout()
     {
+        FirebaseAuth auth = FirebaseAuth.DefaultInstance;
         Debug.Log("Log Out!");
         loginScreen.SetActive(true);
         profileScreen.SetActive(false);
-        if (user != null)
+        if (user != null && auth != null)
         {
             auth.SignOut();
+        }
+        else
+        {
+            Debug.LogError("Cannot sign out: user or auth is null.");
         }
     }
     
