@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Script for bird snapping function
+/// </summary>
 public class SnapPicture : MonoBehaviour
 {
     public TextMeshProUGUI snapText;
@@ -11,6 +14,7 @@ public class SnapPicture : MonoBehaviour
     
     public bool canSnap = true;
     
+    // sfx
     [SerializeField] private AudioSource sfxSource;
     [SerializeField] private AudioClip snapClip;
     [SerializeField] private AudioClip snapSuccessClip;
@@ -29,16 +33,18 @@ public class SnapPicture : MonoBehaviour
             
             RaycastHit2D hit = Physics2D.Raycast(cam.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
             
-            if (hit && hit.collider.CompareTag("Animal"))
+            if (hit && hit.collider.CompareTag("Animal")) // Hit Bird
             {
                 if (hit.collider.gameObject.GetComponent<Bird>().snapped == false)
                 {
                     sfxSource.PlayOneShot(snapSuccessClip);
                     GameManager.instance.BirdSnapped(hit.collider.gameObject.GetComponent<Bird>());
 
+                    // zooms in camera
                     Vector3 clickPoint = new Vector3(hit.collider.transform.position.x, hit.collider.transform.position.y-0.2f, -10);
                     cam.transform.position= clickPoint;
                     cam.orthographicSize = 1;
+                    
                     hit.collider.gameObject.GetComponent<Bird>().speed = 0;
                     hit.collider.gameObject.GetComponent<Bird>().snapped = true;
                     hit.collider.gameObject.GetComponent<SpriteRenderer>().sortingOrder = 6;
@@ -46,8 +52,9 @@ public class SnapPicture : MonoBehaviour
                     StartCoroutine(ZoomOut(hit.collider.gameObject));
                 }
             }
-            else
+            else // Missed Bird
             {
+                // zooms in camera
                 cam.transform.position = cam.ScreenToWorldPoint(Input.mousePosition);
                 cam.orthographicSize = 1;
                 snapText.text = "Miss!";
@@ -56,6 +63,11 @@ public class SnapPicture : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// Zooms the camera back to original position
+    /// </summary>
+    /// <param name="bird"></param>
+    /// <returns></returns>
     IEnumerator ZoomOut(GameObject bird)
     {
         yield return new WaitForSeconds(1);

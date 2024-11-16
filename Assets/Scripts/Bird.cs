@@ -3,11 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Bird Script
+/// </summary>
 public class Bird : MonoBehaviour
 {
     public float speed;
     public float originalSpeed;
-
+    
     public bool snapped = false;
     
     public string birdName;

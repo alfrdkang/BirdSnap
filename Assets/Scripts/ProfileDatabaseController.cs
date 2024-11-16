@@ -9,19 +9,26 @@ using Firebase.Extensions;
 using TMPro;
 using Object = System.Object;
 
+/// <summary>
+/// Database Controller for profile page
+/// </summary>
 public class ProfileDatabaseController : MonoBehaviour
 {
+    // db reference variables
     private DatabaseReference reference;
     private FirebaseAuth auth;
     private FirebaseUser user;
     
-    [SerializeField] TextMeshProUGUI usernameText;
+    // profile text variables
+    [SerializeField] private TextMeshProUGUI usernameText;
     [SerializeField] private TextMeshProUGUI dateCreatedText;
     [SerializeField] private TextMeshProUGUI emailText;
     
+    // screens
     [SerializeField] private GameObject loginScreen;
     [SerializeField] private GameObject profileScreen;
     
+    // function panels and text
     [SerializeField] private GameObject updateUsernamePanel;
     [SerializeField] private TextMeshProUGUI updateUsernameValidationText;
     [SerializeField] private TMP_InputField updateUsernameInputField;
@@ -180,7 +187,7 @@ public class ProfileDatabaseController : MonoBehaviour
         }
     }
     
-    //validation/exceptions
+    //validation&exceptions
     public string HandleAuthExceptions(System.AggregateException e)
     {
         string validationText = "";
@@ -223,6 +230,7 @@ public class ProfileDatabaseController : MonoBehaviour
         return validationText;
     }
 
+    // clear all text fields
     public void ClearFields()
     {
         updateEmailInputField.text = "";

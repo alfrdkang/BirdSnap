@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Game Manager Script
+/// </summary>
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -13,17 +16,23 @@ public class GameManager : MonoBehaviour
     public bool gameStarted = false;
     public float gameDuration = 45f;
     
-    [SerializeField] private GameObject hud;
+    // Game Over Screens
     [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private GameObject gameOverScore;
     [SerializeField] private GameObject gameOverBirdsSnap;
     [SerializeField] private GameObject gameOverAccuracy;
     
+    /// <summary>
+    /// Game Object parent of spawned birds
+    /// </summary>
     [SerializeField] private GameObject spawnedBirds;
     
+    // HUD
+    [SerializeField] private GameObject hud;
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI timerText;
     
+    // SFX
     [SerializeField] private AudioSource sfxSource;
     [SerializeField] private AudioClip gameEndClip;
     [SerializeField] private AudioClip buttonClickClip;
@@ -43,7 +52,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        //if a previous game is running
+        // if a previous game is running
         StopAllCoroutines();
         foreach (Transform child in spawnedBirds.transform)
         {
@@ -58,12 +67,15 @@ public class GameManager : MonoBehaviour
         hud.SetActive(true);
         gameStarted = true;
         
-        //restart bgm
+        // restart bgm
         BGMController.instance.PlayAmbience();
         
         StartCoroutine(Timer.instance.StartTimer(gameDuration));
     }
 
+    /// <summary>
+    /// Plays an SFX when UI buttons are clicked
+    /// </summary>
     public void ButtonSFX()
     {
         sfxSource.PlayOneShot(buttonClickClip);
@@ -75,6 +87,8 @@ public class GameManager : MonoBehaviour
         sfxSource.PlayOneShot(gameEndClip);
         gameStarted = false;
         hud.SetActive(false);
+        
+        // Display Game Over Screen
         gameOverScreen.SetActive(true);
         gameOverScore.GetComponent<TextMeshProUGUI>().text = "Score: " + score;
         gameOverBirdsSnap.GetComponent<TextMeshProUGUI>().text = "Birds Snapped: " + birdsSnapped;
@@ -90,6 +104,12 @@ public class GameManager : MonoBehaviour
         scoreText.text = "Score: " + score.ToString();
     }
 
+    /// <summary>
+    /// calculates user's snap accuracy
+    /// </summary>
+    /// <param name="birdsSnapped"></param>
+    /// <param name="snapCount"></param>
+    /// <returns></returns>
     public float CalculateAccuracy(float birdsSnapped, float snapCount)
     {
         return Mathf.Round(birdsSnapped / snapCount * 100);

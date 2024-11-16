@@ -11,17 +11,28 @@ using TMPro;
 using UnityEngine.SocialPlatforms.Impl;
 using Object = System.Object;
 
+/// <summary>
+/// Database Controller for Leaderboard
+/// </summary>
 public class LeaderboardDatabaseController : MonoBehaviour
 {
+    // db reference variables
     private DatabaseReference reference;
     private FirebaseAuth auth;
     private FirebaseUser user;
 
+    /// <summary>
+    /// index of leaderboard sort selected by user
+    /// </summary>
     private int sortIndex = 0;
     
     [SerializeField] private GameObject leaderboardPanel;
-    [SerializeField] private GameObject leaderboardEntryPrefab;
     
+    /// <summary>
+    /// leaderboard entry prefab
+    /// </summary>
+    [SerializeField] private GameObject leaderboardEntryPrefab;
+
     [SerializeField] private Sprite sortSpriteInactive;
     [SerializeField] private Sprite sortSpriteActive;
     [SerializeField] private Sprite userLeaderboardBgSprite;
@@ -29,6 +40,7 @@ public class LeaderboardDatabaseController : MonoBehaviour
     [SerializeField] private Image birdsSnappedSortImg;
     [SerializeField] private Image accuracySortImg;
     
+    // profile leaderboard variables
     [SerializeField] private TextMeshProUGUI profileUsernameText;
     [SerializeField] private TextMeshProUGUI profileHighscoreText;
     [SerializeField] private TextMeshProUGUI profileBirdsSnappedText;
@@ -91,7 +103,7 @@ public class LeaderboardDatabaseController : MonoBehaviour
                 } 
                 if (args.Snapshot != null && args.Snapshot.ChildrenCount > 0)
                 {
-                    //reset existing leaderboard child
+                    // reset existing leaderboard child
                     foreach (Transform child in leaderboardPanel.transform)
                     {
                         Destroy(child.gameObject);
@@ -101,18 +113,12 @@ public class LeaderboardDatabaseController : MonoBehaviour
                     List<DataSnapshot> childSnapshots = new List<DataSnapshot>(args.Snapshot.Children);
                     childSnapshots.Reverse();
                     
-                    //instantiate leaderboard entries
+                    // instantiate leaderboard entries
                     foreach (var childSnapshot in args.Snapshot.Children)
                     {
                         GameObject leaderboardEntry = Instantiate(leaderboardEntryPrefab, leaderboardPanel.transform);
                         
-                        //check if user
-                        if (childSnapshots[i].Key == auth.CurrentUser.UserId)
-                        {
-                            leaderboardEntry.GetComponent<Image>().sprite = userLeaderboardBgSprite;
-                        }
-                        
-                        //special colours for top 3
+                        // special colours for top 3
                         if ((i + 1) == 1)
                         {
                             leaderboardEntry.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().color = Color.yellow;
@@ -126,7 +132,7 @@ public class LeaderboardDatabaseController : MonoBehaviour
                         
                         leaderboardEntry.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text =
                             "#" + (i+1);
-                        //check if user
+                        // check if leaderboard entry is user
                         if (childSnapshots[i].Key == user.UserId)
                         {
                             leaderboardEntry.GetComponent<Image>().sprite = userLeaderboardBgSprite;
@@ -162,7 +168,7 @@ public class LeaderboardDatabaseController : MonoBehaviour
                 } 
                 if (args.Snapshot != null && args.Snapshot.ChildrenCount > 0)
                 {
-                    //reset existing leaderboard child
+                    // reset existing leaderboard child
                     foreach (Transform child in leaderboardPanel.transform)
                     {
                         Destroy(child.gameObject);
@@ -172,18 +178,12 @@ public class LeaderboardDatabaseController : MonoBehaviour
                     List<DataSnapshot> childSnapshots = new List<DataSnapshot>(args.Snapshot.Children);
                     childSnapshots.Reverse();
                     
-                    //instantiate leaderboard entries
+                    // instantiate leaderboard entries
                     foreach (var childSnapshot in args.Snapshot.Children)
                     {
                         GameObject leaderboardEntry = Instantiate(leaderboardEntryPrefab, leaderboardPanel.transform);
                         
-                        //check if user
-                        if (childSnapshots[i].Key == user.UserId)
-                        {
-                            leaderboardEntry.GetComponent<Image>().sprite = userLeaderboardBgSprite;
-                        }
-                        
-                        //special colours for top 3
+                        // special colours for top 3
                         if ((i + 1) == 1)
                         {
                             leaderboardEntry.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().color = Color.yellow;
@@ -197,7 +197,7 @@ public class LeaderboardDatabaseController : MonoBehaviour
                         
                         leaderboardEntry.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text =
                             "#" + (i+1);
-                        //check if user
+                        // check if leaderboard entry is user
                         if (childSnapshots[i].Key == user.UserId)
                         {
                             leaderboardEntry.GetComponent<Image>().sprite = userLeaderboardBgSprite;
@@ -232,7 +232,7 @@ public class LeaderboardDatabaseController : MonoBehaviour
                 } 
                 if (args.Snapshot != null && args.Snapshot.ChildrenCount > 0)
                 {
-                    //reset existing leaderboard child
+                    // reset existing leaderboard child
                     foreach (Transform child in leaderboardPanel.transform)
                     {
                         Destroy(child.gameObject);
@@ -242,12 +242,12 @@ public class LeaderboardDatabaseController : MonoBehaviour
                     List<DataSnapshot> childSnapshots = new List<DataSnapshot>(args.Snapshot.Children);
                     childSnapshots.Reverse();
                     
-                    //instantiate leaderboard entries
+                    // instantiate leaderboard entries
                     foreach (var childSnapshot in args.Snapshot.Children)
                     {
                         GameObject leaderboardEntry = Instantiate(leaderboardEntryPrefab, leaderboardPanel.transform);
                         
-                        //special colours for top 3
+                        // special colours for top 3
                         if ((i + 1) == 1)
                         {
                             leaderboardEntry.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().color = Color.yellow;
@@ -261,7 +261,7 @@ public class LeaderboardDatabaseController : MonoBehaviour
                         
                         leaderboardEntry.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text =
                             "#" + (i+1);
-                        //check if user
+                        // check if leaderboard entry is user
                         if (childSnapshots[i].Key == user.UserId)
                         {
                             leaderboardEntry.GetComponent<Image>().sprite = userLeaderboardBgSprite;
@@ -282,6 +282,10 @@ public class LeaderboardDatabaseController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Changed leaderboard sort index depending on user selection
+    /// </summary>
+    /// <param name="index"></param>
     public void LeaderboardSortIndex(int index)
     {
         sortIndex = index;

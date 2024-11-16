@@ -2,12 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Script to control background music
+/// </summary>
 public class BGMController : MonoBehaviour
 {
     public static BGMController instance;
     
+    /// <summary>
+    /// background music audio source
+    /// </summary>
     private AudioSource audioSource;
+    
+    /// <summary>
+    /// main menu background music clip
+    /// </summary>
     [SerializeField] private AudioClip menuBGM;
+    /// <summary>
+    /// game background music clip
+    /// </summary>
     [SerializeField] private AudioClip ambienceBGM;
     
     private void Awake()
@@ -28,7 +41,7 @@ public class BGMController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         PlayMusic();
     }
-  
+    
     public void PlayMusic()
     {
         if (!audioSource.isPlaying)
@@ -36,7 +49,7 @@ public class BGMController : MonoBehaviour
             audioSource.Play();
         }
     }
-  
+    
     public void StopMusic()
     {
         if (audioSource.isPlaying)
@@ -44,7 +57,7 @@ public class BGMController : MonoBehaviour
             audioSource.Stop();
         }
     }
-
+    
     public void PauseMusic()
     {
         if (audioSource.isPlaying)
@@ -53,6 +66,9 @@ public class BGMController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// start playing ambience (game) music clip
+    /// </summary>
     public void PlayAmbience()
     {
         if (audioSource.isPlaying)
@@ -63,6 +79,9 @@ public class BGMController : MonoBehaviour
         audioSource.Play();
     }
     
+    /// <summary>
+    /// start playing menu music clip
+    /// </summary>
     public void PlayMenuBGM()
     {
         if (audioSource.isPlaying)

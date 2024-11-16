@@ -16,34 +16,39 @@ using Unity.VisualScripting;
 using UnityEngine.Rendering;
 using Object = System.Object;
 
+/// <summary>
+/// Database Manager Script
+/// </summary>
 public class DatabaseManager : MonoBehaviour
 {
     public static DatabaseManager instance;
     
+    // Database reference variables
     private DatabaseReference reference;
     private FirebaseAuth auth;
     private FirebaseUser user;
 
     public int numberOfPlayers;
     
+    // UI Screens
     [SerializeField] private GameObject homeScreen;
     [SerializeField] private GameObject signupScreen;
     [SerializeField] private GameObject loginScreen;
     [SerializeField] private GameObject resetPasswordScreen;
     
-    //Signup
+    // Signup
     [SerializeField] private TMP_InputField signupUsernameInputField;
     [SerializeField] private TMP_InputField signupEmailInputField;
     [SerializeField] private TMP_InputField signupPasswordInputField;
     [SerializeField] private TMP_InputField signupConfirmPasswordInputField;
     [SerializeField] private TextMeshProUGUI signupValidationText;
     
-    //Login
+    // Login
     [SerializeField] private TMP_InputField loginEmailInputField;
     [SerializeField] private TMP_InputField loginPasswordInputField;
     [SerializeField] private TextMeshProUGUI loginValidationText;
     
-    //Reset Password
+    // Reset Password
     [SerializeField] private TMP_InputField resetPasswordEmailInputField;
     [SerializeField] private TextMeshProUGUI resetPasswordValidationText;
     
@@ -69,17 +74,16 @@ public class DatabaseManager : MonoBehaviour
         
         if (auth.CurrentUser != null)
         {
-            //update last login
+            // update last login
             Dictionary<string, Object> childUpdates = new Dictionary<string, Object>();
             childUpdates["players/" + auth.CurrentUser.UserId + "/lastLoginDate/"] = ConvertNowToTimeStamp();
 
             reference.UpdateChildrenAsync(childUpdates);
             
+            // skips login screen and goes to home screen if user is already signed in
             loginScreen.SetActive(false);
             homeScreen.SetActive(true);
             ResetFields();
-            
-            // auth.SignOut(); //NOTE: remove on build, add auto switch to homescreen if signed in
         }
 
         AuthStateChanged(this, null);
@@ -116,20 +120,22 @@ public class DatabaseManager : MonoBehaviour
         }
 
         numberOfPlayers = (int)args.Snapshot.ChildrenCount;
-        //playerCountText.text = numberOfPlayers.ToString();
     }
     
-    //Account Interaction Functions
+    // Account Interaction Functions
 
+    /// <summary>
+    /// Account Sign Up
+    /// </summary>
     public void SignUp()  
     {
         Debug.Log("Submit Values (Signup)");
         if (!string.IsNullOrWhiteSpace(signupUsernameInputField.text) && 
             !string.IsNullOrWhiteSpace(signupEmailInputField.text) && 
             !string.IsNullOrWhiteSpace(signupPasswordInputField.text) && 
-            !string.IsNullOrWhiteSpace(signupConfirmPasswordInputField.text))
+            !string.IsNullOrWhiteSpace(signupConfirmPasswordInputField.text)) // checks if all fields has been entered
         {
-            if (signupPasswordInputField.text == signupConfirmPasswordInputField.text)
+            if (signupPasswordInputField.text == signupConfirmPasswordInputField.text) // checks if passwords match
             {
                 string username = signupUsernameInputField.text;
                 string email = signupEmailInputField.text;
@@ -200,11 +206,14 @@ public class DatabaseManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Account Log In
+    /// </summary>
     public void Login()
     {
         Debug.Log("Submit Values (Login)");
         if (!string.IsNullOrWhiteSpace(loginEmailInputField.text) &&
-            !string.IsNullOrWhiteSpace(loginPasswordInputField.text))
+            !string.IsNullOrWhiteSpace(loginPasswordInputField.text)) // checks if all fields has been entered
         {
             auth.SignInWithEmailAndPasswordAsync(loginEmailInputField.text, loginPasswordInputField.text)
                 .ContinueWithOnMainThread(task =>
@@ -240,9 +249,12 @@ public class DatabaseManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sends Email to the User to reset their password
+    /// </summary>
     public void ResetPassword()
     {
-        if (!string.IsNullOrWhiteSpace(resetPasswordEmailInputField.text))
+        if (!string.IsNullOrWhiteSpace(resetPasswordEmailInputField.text)) // checks if all fields has been entered
         {
             auth.SendPasswordResetEmailAsync(resetPasswordEmailInputField.text).ContinueWithOnMainThread(task =>
             {
@@ -275,6 +287,9 @@ public class DatabaseManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// resets text fields
+    /// </summary>
     public void ResetFields()
     {
         signupUsernameInputField.text = "";
@@ -334,6 +349,22 @@ public class DatabaseManager : MonoBehaviour
     }
     
     //Db Writing Functions
+    
+    /// <summary>
+    /// Write new player entry to database
+    /// </summary>
+    /// <param name="uid"></param>
+    /// <param name="name"></param>
+    /// <param name="email"></param>
+    /// <param name="creationDate"></param>
+    /// <param name="lastLoginDate"></param>
+    /// <param name="updatedDate"></param>
+    /// <param name="highScore"></param>
+    /// <param name="gamesPlayed"></param>
+    /// <param name="birdsSnapped"></param>
+    /// <param name="totalSnaps"></param>
+    /// <param name="achievements"></param>
+    /// <param name="accuracy"></param>
     private void WriteNewPlayer(string uid, string name, string email, string creationDate, string lastLoginDate, string updatedDate, int highScore, int gamesPlayed, int birdsSnapped, int totalSnaps, string[] achievements, float accuracy)
     {
         PlayerData player = new PlayerData(name, email, creationDate, lastLoginDate, highScore, gamesPlayed, birdsSnapped, totalSnaps, achievements, accuracy);
@@ -347,6 +378,12 @@ public class DatabaseManager : MonoBehaviour
         reference.Child("leaderboard").Child(uid).SetRawJsonValueAsync(leaderboardJson);
     }
 
+    /// <summary>
+    /// Updates player statistics after every game
+    /// </summary>
+    /// <param name="score"></param>
+    /// <param name="birdsSnapped"></param>
+    /// <param name="totalSnaps"></param>
     public void UpdatePlayData(int score, float birdsSnapped, float totalSnaps)
     {
         reference.Child("players").Child(user.UserId).GetValueAsync().ContinueWithOnMainThread(task =>
@@ -393,6 +430,10 @@ public class DatabaseManager : MonoBehaviour
         });
     }
     
+    /// <summary>
+    /// Converts current time to epoch timestamp
+    /// </summary>
+    /// <returns></returns>
     public string ConvertNowToTimeStamp()
     {
         DateTimeOffset dto = new DateTimeOffset(DateTime.UtcNow);

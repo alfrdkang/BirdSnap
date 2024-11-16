@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Script to manage in-game timer
+/// </summary>
 public class Timer : MonoBehaviour
 {
     public static Timer instance;

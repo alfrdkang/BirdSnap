@@ -5,13 +5,20 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Script to manage switching and functions of menus
+/// </summary>
 public class MenuManager : MonoBehaviour
 {
+    // ui menus
     [SerializeField] private GameObject hud;
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject gameOverMenu;
     [SerializeField] private GameObject homeMenu;
     
+    /// <summary>
+    /// parent of spawned birds
+    /// </summary>
     [SerializeField] private GameObject spawnedBirds;
 
     public bool isPaused = false;
